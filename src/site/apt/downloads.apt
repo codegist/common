@@ -1,0 +1,20 @@
+    ------
+    Downloads
+    ------
+
+Downloads
+
+* System Requirements
+
+    * JDK:  1.5 or above
+
+    * Disk: ~40kb
+
+* CRest 1.0.0
+
+    Release date : 2010-11-20
+
+    * Binaries : {{{bin/codegist-common-1.0.0.jar} codegist-common-1.0.0.jar}} (~40kb)
+
+    * Sources : {{{bin/codegist-common-1.0.0-sources.jar} codegist-common-1.0.0-sources.jar}} (~30kb)
+
