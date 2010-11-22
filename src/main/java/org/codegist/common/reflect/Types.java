@@ -1,3 +1,23 @@
+/*
+ * Copyright 2010 CodeGist.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ *
+ * ===================================================================
+ *
+ * More information at http://www.codegist.org.
+ */
+
 package org.codegist.common.reflect;
 
 import org.codegist.common.collect.Maps;
@@ -10,6 +30,9 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
 public final class Types {
     private Types() {
     }
@@ -138,7 +161,7 @@ public final class Types {
      * <code><pre>
      * Type type = Types.getGenericType(java.util.List.class, new Type[]{java.lang.String.class}, null)
      * </pre></code>
-     * <p>The returned type variable will hold generic informations for the type java.util.List&lt;java.lang.String&gt;
+     * <p>The returned type variable will hold generic information for the type java.util.List&lt;java.lang.String&gt;
      *
      * @param holder              the Class representing the generic type declaration being instantiated
      * @param actualTypeArguments a (possibly empty) array of types representing the actual type arguments to the parameterized type
