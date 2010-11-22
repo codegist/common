@@ -35,18 +35,26 @@
     <packaging>jar</packaging>
     <url>http://common.codegist.org/</url>
 
-    <description>Set of utility classes for common tasks, as encoding/decoding, collections, I/O, marshalling/unmarshalling, reflection and more.</description>
+    <description>CodeGist Commons offers a set of utility classes for common tasks, as encoding/decoding, collections, I/O, marshalling/unmarshalling, reflection and more.</description>
 
     <scm>
         <connection>scm:git:git://github.com/codegist/common.git</connection>
         <developerConnection>scm:git:git://github.com/codegist/common.git</developerConnection>
-        <url>https://github.com/codegist/common</url>
+        <url>git://github.com/codegist/common.git</url>
     </scm>
 
     <issueManagement>
         <system>Github Issue Tracker</system>
         <url>https://github.com/codegist/common/issues</url>
     </issueManagement>
+
+    <licenses>
+        <license>
+            <name>Apache Software License - Version 2.0</name>
+            <url>http://common.codegist.org/LICENSE.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <reporting>
         <plugins>
