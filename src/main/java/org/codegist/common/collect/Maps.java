@@ -63,6 +63,18 @@ public final class Maps {
         return true;
     }
 
+
+    /**
+     * Returns an empty map if given map is null
+     * @param map the map to check
+     * @param <K> Key type
+     * @param <V> Value type
+     * @return the given map or a new empty one
+     */
+    public static <K, V> Map<K, V> defaultsIfNull(Map<K, V> map) {
+        return map != null ? map : new HashMap<K,V>();
+    }
+
     /**
      * Returns an unmodifiable view of the given map, if the map is null, return an unmodifiable empty map.
      *
