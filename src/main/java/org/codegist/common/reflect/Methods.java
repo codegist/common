@@ -20,9 +20,12 @@
 
 package org.codegist.common.reflect;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -32,6 +35,22 @@ public final class Methods {
     private Methods() {
     }
 
+    public static Map<Class, Annotation>[] getParamsAnnotation(Method method) {
+        int paramsCount = method.getParameterTypes().length;
+        Map<Class, Annotation>[] paramAnnotations = new HashMap[paramsCount];
+        for (int i = 0; i < paramsCount; i++) {
+            paramAnnotations[i] = getParamsAnnotation(method, i);
+        }
+        return paramAnnotations;
+    }
+    public static Map<Class, Annotation> getParamsAnnotation(Method method, int index) {
+        Annotation[] annotations = method.getParameterAnnotations()[index];
+        Map<Class, Annotation> paramAnnotations = new HashMap<Class, Annotation>();
+        for (Annotation anno : annotations) {
+            paramAnnotations.put(anno.getClass(), anno);
+        }
+        return paramAnnotations;
+    }
     /**
      * Returns true if the given method is either equals()/hashCode()/toString() method.
      *

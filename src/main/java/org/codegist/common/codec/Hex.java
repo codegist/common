@@ -28,10 +28,7 @@ public final class Hex {
     private Hex() {
     }
 
-    private static final char[] DIGITS = {
-            '0', '1', '2', '3', '4', '5', '6', '7',
-            '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-    };
+    private static final char[] DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
 
     /**
@@ -41,12 +38,12 @@ public final class Hex {
      * @return hexadecimal string
      */
     public static String encodeHex(byte[] data) {
-        StringBuilder sb = new StringBuilder(data.length * 2);
-        for (int i = 0, l = data.length; i < l; i++) {
-            sb.append(DIGITS[(0xF0 & data[i]) >>> 4]);
-            sb.append(DIGITS[0x0F & data[i]]);
+        char[] c = new char[data.length * 2];
+        for (int i = 0, j = 0, l = data.length; i < l; i++) {
+            c[j++] = DIGITS[(0xF0 & data[i]) >>> 4];
+            c[j++] = DIGITS[0x0F & data[i]];
         }
-        return sb.toString();
+        return String.valueOf(c);
     }
 
 }
