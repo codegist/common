@@ -22,10 +22,7 @@ package org.codegist.common.reflect;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -35,19 +32,19 @@ public final class Methods {
     private Methods() {
     }
 
-    public static Map<Class, Annotation>[] getParamsAnnotation(Method method) {
+    public static Map<Class<? extends Annotation>, Annotation>[] getParamsAnnotation(Method method) {
         int paramsCount = method.getParameterTypes().length;
-        Map<Class, Annotation>[] paramAnnotations = new HashMap[paramsCount];
+        Map<Class<? extends Annotation>, Annotation>[] paramAnnotations = new Map[paramsCount];
         for (int i = 0; i < paramsCount; i++) {
             paramAnnotations[i] = getParamsAnnotation(method, i);
         }
         return paramAnnotations;
     }
-    public static Map<Class, Annotation> getParamsAnnotation(Method method, int index) {
+    public static Map<Class<? extends Annotation>, Annotation> getParamsAnnotation(Method method, int index) {
         Annotation[] annotations = method.getParameterAnnotations()[index];
-        Map<Class, Annotation> paramAnnotations = new HashMap<Class, Annotation>();
+        Map<Class<? extends Annotation>, Annotation> paramAnnotations = new LinkedHashMap<Class<? extends Annotation>, Annotation>();
         for (Annotation anno : annotations) {
-            paramAnnotations.put(anno.getClass(), anno);
+            paramAnnotations.put(anno.annotationType(), anno);
         }
         return paramAnnotations;
     }
