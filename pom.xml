@@ -35,7 +35,9 @@
     <packaging>jar</packaging>
     <url>http://common.codegist.org/</url>
 
-    <description>CodeGist Commons offers a set of utility classes for common tasks, as encoding/decoding, collections, I/O, marshalling/unmarshalling, reflection and more.</description>
+    <description>CodeGist Commons offers a set of utility classes for common tasks, as encoding/decoding, collections, I/O, marshalling/unmarshalling,
+        reflection and more.
+    </description>
 
     <scm>
         <connection>scm:git:git://github.com/codegist/common.git</connection>

@@ -26,8 +26,8 @@ import java.lang.reflect.Proxy;
 /**
  * ProxyFactory backed-up with Jdk native {@link java.lang.reflect.Proxy}
  *
- * @see java.lang.reflect.Proxy
  * @author Laurent Gilles (laurent.gilles@codegist.org)
+ * @see java.lang.reflect.Proxy
  */
 public class JdkProxyFactory implements ProxyFactory {
 

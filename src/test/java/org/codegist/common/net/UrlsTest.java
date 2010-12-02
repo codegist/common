@@ -20,7 +20,6 @@
 
 package org.codegist.common.net;
 
-import org.codegist.common.net.Urls;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
@@ -35,6 +34,45 @@ import static org.junit.Assert.*;
  */
 public class UrlsTest {
 
+    @Test
+    public void testEncode() throws UnsupportedEncodingException {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("abcABC123", "abcABC123");
+        map.put("-._~", "-._~");
+        map.put("%", "%25");
+        map.put("+", "%2B");
+        map.put("&=*", "%26%3D%2A");
+        map.put("\n", "%0A");
+        map.put("\u0020", "%20");// Space
+        map.put("\u007F", "%7F");
+        map.put("\u0080", "%C2%80");
+        map.put("\u3001", "%E3%80%81");
+        for (Map.Entry<String, String> e : map.entrySet()) {
+            String val = Urls.encode(e.getKey(), "utf-8");
+            assertEquals(e.getValue(), val);
+        }
+    }
+
+    @Test
+    public void testDecode() throws UnsupportedEncodingException {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("abcABC123", "abcABC123");
+        map.put("-._~", "-._~");
+        map.put("%25", "%");
+        map.put("%2B", "+");
+        map.put("%26%3D%2A", "&=*");
+        map.put("%0A", "\n");
+        map.put("%20", "\u0020");// Space
+        map.put("%7F", "\u007F");
+        map.put("%C2%80", "\u0080");
+        map.put("%E3%80%81", "\u3001");
+        for (Map.Entry<String, String> e : map.entrySet()) {
+            String val = Urls.decode(e.getKey(), "utf-8");
+            assertEquals(e.getValue(), val);
+        }
+    }
+
+
     static final Map<String, String> PARAMS = new LinkedHashMap<String, String>() {{
         put("a", "b");
         put("c", "d");
@@ -42,8 +80,8 @@ public class UrlsTest {
         put("g", "h & f");
         put("special", "sadely all is about $$$ and £££");
     }};
-    static final String EXPECTED_UTF8 = "a=b&c=d&e=f&g=h+%26+f&special=sadely+all+is+about+%24%24%24+and+%C2%A3%C2%A3%C2%A3";
-    static final String EXPECTED_ISO88591 = "a=b&c=d&e=f&g=h+%26+f&special=sadely+all+is+about+%24%24%24+and+%A3%A3%A3";
+    static final String EXPECTED_UTF8 = "a=b&c=d&e=f&g=h%20%26%20f&special=sadely%20all%20is%20about%20%24%24%24%20and%20%C2%A3%C2%A3%C2%A3";
+    static final String EXPECTED_ISO88591 = "a=b&c=d&e=f&g=h%20%26%20f&special=sadely%20all%20is%20about%20%24%24%24%20and%20%A3%A3%A3";
 
     @Test(expected = NullPointerException.class)
     public void testBuildQueryStringNull() throws UnsupportedEncodingException {

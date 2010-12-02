@@ -20,7 +20,7 @@
 
 <project name="${project.name}">
     <body>
-        
+
         <head>
             <meta name="description" content="${project.description}"/>
         </head>

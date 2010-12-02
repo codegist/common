@@ -52,13 +52,35 @@ public final class Urls {
         for (Map.Entry<String, String> entry : params.entrySet()) {
             urlBuilder.append(entry.getKey());
             urlBuilder.append("=");
-            urlBuilder.append(URLEncoder.encode(entry.getValue(), encoding));
+            urlBuilder.append(encode(entry.getValue(), encoding));
             if (++i < max) {
                 urlBuilder.append("&");
             }
 
         }
         return urlBuilder.toString();
+    }
+
+    public static String encode(String value, String encoding) throws UnsupportedEncodingException {
+        if (value == null) return "";
+        String encoded = URLEncoder.encode(value, encoding);
+        StringBuffer buf = new StringBuffer(encoded.length());
+        char focus;
+
+        for (int i = 0; i < encoded.length(); i++) {
+            focus = encoded.charAt(i);
+            if (focus == '*') {
+                buf.append("%2A");
+            } else if (focus == '+') {
+                buf.append("%20");
+            } else if (focus == '%' && (i + 1) < encoded.length() && encoded.charAt(i + 1) == '7' && encoded.charAt(i + 2) == 'E') {
+                buf.append('~');
+                i += 2;
+            } else {
+                buf.append(focus);
+            }
+        }
+        return buf.toString();
     }
 
     /**
@@ -125,7 +147,7 @@ public final class Urls {
      * @param encoding encoding
      * @return decoded content
      */
-    private static String decode(String content, String encoding) {
+    static String decode(String content, String encoding) {
         try {
             return URLDecoder.decode(content, encoding);
         } catch (UnsupportedEncodingException problem) {

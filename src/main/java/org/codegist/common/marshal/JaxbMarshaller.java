@@ -28,8 +28,8 @@ import java.lang.reflect.Type;
 /**
  * Xml Marshaller and Unmarshaller based on jdk's {@link javax.xml.bind.JAXBContext}.
  *
- * @see javax.xml.bind.JAXBContext
  * @author Laurent Gilles (laurent.gilles@codegist.org)
+ * @see javax.xml.bind.JAXBContext
  */
 public class JaxbMarshaller implements Marshaller, Unmarshaller {
     private final JAXBContext jaxbContext;

@@ -22,7 +22,10 @@ package org.codegist.common.reflect;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -40,6 +43,7 @@ public final class Methods {
         }
         return paramAnnotations;
     }
+
     public static Map<Class<? extends Annotation>, Annotation> getParamsAnnotation(Method method, int index) {
         Annotation[] annotations = method.getParameterAnnotations()[index];
         Map<Class<? extends Annotation>, Annotation> paramAnnotations = new LinkedHashMap<Class<? extends Annotation>, Annotation>();
@@ -48,6 +52,7 @@ public final class Methods {
         }
         return paramAnnotations;
     }
+
     /**
      * Returns true if the given method is either equals()/hashCode()/toString() method.
      *

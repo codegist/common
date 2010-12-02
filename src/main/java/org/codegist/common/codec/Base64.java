@@ -74,7 +74,8 @@ public final class Base64 {
     private static final char[] CA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
     private static final int[] IA = new int[256];
 
-    private Base64(){}
+    private Base64() {
+    }
 
     static {
         Arrays.fill(IA, -1);
@@ -90,6 +91,7 @@ public final class Base64 {
     public static char[] encodeToChar(byte[] sArr) {
         return encodeToChar(sArr, true);
     }
+
     /**
      * Encodes a raw byte array into a BASE64 <code>char[]</code> representation i accordance with RFC 2045.
      *
@@ -272,6 +274,7 @@ public final class Base64 {
     public static byte[] encodeToByte(byte[] sArr) {
         return encodeToByte(sArr, true);
     }
+
     /**
      * Encodes a raw byte array into a BASE64 <code>byte[]</code> representation i accordance with RFC 2045.
      *
@@ -455,6 +458,7 @@ public final class Base64 {
     public static String encodeToString(byte[] sArr) {
         return encodeToString(sArr, true);
     }
+
     /**
      * Encodes a raw byte array into a BASE64 <code>String</code> representation i accordance with RFC 2045.
      *

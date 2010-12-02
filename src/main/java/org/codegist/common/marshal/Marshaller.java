@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 
 /**
  * Generic interface for a marshaller.
+ *
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public interface Marshaller {

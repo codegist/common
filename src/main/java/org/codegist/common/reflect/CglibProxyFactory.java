@@ -27,8 +27,8 @@ import java.lang.reflect.Method;
 /**
  * ProxyFactory backed-up with CGlib {@link net.sf.cglib.proxy.Proxy}. Need CGlib in the classpath (<a href="http://cglib.sourceforge.net/">http://cglib.sourceforge.net/</a>).
  *
- * @see net.sf.cglib.proxy.Proxy
  * @author Laurent Gilles (laurent.gilles@codegist.org)
+ * @see net.sf.cglib.proxy.Proxy
  */
 public class CglibProxyFactory implements ProxyFactory {
 

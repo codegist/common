@@ -18,19 +18,21 @@
  * More information at http://www.codegist.org.
  */
 
-package org.codegist.common.marshal;
+package org.codegist.common.lang;
 
-import java.io.Writer;
+public final class Validate {
+    private Validate(){}
 
-/**
- * Generic interface for a unmarshaller
- *
- * @author Laurent Gilles (laurent.gilles@codegist.org)
- */
-public interface Unmarshaller {
+    public static void notNull(Object arg, String errorMessage){
+        if(arg == null) {
+            throw new IllegalArgumentException(errorMessage);
+        }
+    }
 
-    String unmarshall(Object object) throws MarshallException;
-
-    void unmarshall(Object object, Writer writer) throws MarshallException;
+    public static void notEmpty(String arg, String errorMessage){
+        if(Strings.isBlank(arg)) {
+            throw new IllegalArgumentException(errorMessage);
+        }
+    }
 
 }

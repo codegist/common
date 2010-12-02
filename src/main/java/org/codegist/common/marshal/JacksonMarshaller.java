@@ -31,8 +31,8 @@ import java.util.Map;
 /**
  * Json Marshaller and Unmarshaller based on {@link org.codehaus.jackson.map.ObjectMapper}. Requires Jackson lib in the classpath (<a href="http://jackson.codehaus.org/">http://jackson.codehaus.org/</a>).
  *
- * @see org.codehaus.jackson.map.ObjectMapper
  * @author Laurent Gilles (laurent.gilles@codegist.org)
+ * @see org.codehaus.jackson.map.ObjectMapper
  */
 public class JacksonMarshaller implements Marshaller, Unmarshaller {
 
