@@ -33,6 +33,17 @@ public final class Maps {
     private Maps() {
     }
 
+    public static <K,V> Map<K,V> filter(Map<K,V> map, K... filterKeys){
+        if(filterKeys == null) return map;
+        Map<K,V> filtered = new HashMap<K,V>();
+        List<K> filter = java.util.Arrays.asList(filterKeys);
+        for(Map.Entry<K,V> entry : map.entrySet()){
+            if(filter.contains(entry.getKey())) continue;
+            filtered.put(entry.getKey(), entry.getValue());
+        }
+        return filtered;
+    }
+
     /**
      * Looks through all the maps and checks if all are null or empty
      *
