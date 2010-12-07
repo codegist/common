@@ -33,6 +33,34 @@ import static org.junit.Assert.*;
 public class MapsTest {
 
     @Test
+    public void testFilterNull(){
+        assertNull(Maps.filter(null, null));
+    }
+
+    @Test
+    public void testFilterEmpty(){
+        Map m = new HashMap<Object, Object>(){{
+            put("a","b");
+            put("c","d");
+        }};
+        assertEquals(m, Maps.filter(m, ""));
+    }
+
+    @Test
+    public void testFilter(){
+        Map m = new HashMap<Object, Object>(){{
+            put("a","b");
+            put("c","d");
+            put("e","f");
+            put("g","h");
+        }};
+        Map expected = new HashMap<Object, Object>(){{
+            put("c","d");
+        }};
+        assertEquals(expected, Maps.filter(m, "a","e","g"));
+    }
+
+    @Test
     public void testAreEmptiesNull() {
         assertTrue(Maps.areEmpties(null));
     }
