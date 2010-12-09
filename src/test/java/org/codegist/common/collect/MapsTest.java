@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import java.util.Collections;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 
@@ -31,6 +32,41 @@ import static org.junit.Assert.*;
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public class MapsTest {
+
+    @Test
+    public void testExtractByPatternNull(){
+        assertNull(Maps.extractByPattern(null, (String[])null));
+        assertNull(Maps.extractByPattern(null, (Pattern[])null));
+    }
+
+    @Test
+    public void testExtractByPatternEmpty(){
+        Map<String,Object> m = new HashMap<String, Object>(){{
+            put("a","b");
+            put("c","d");
+        }};
+        assertTrue(Maps.extractByPattern(m, "").isEmpty());
+    }
+
+    @Test
+    public void testExtractByPattern(){
+        Map<String,Object> m = new HashMap<String, Object>(){{
+            put("a123b","b");
+            put("c123d","d");
+            put("c456d","f");
+            put("cdd","h");
+            put("46","h");
+            put("65","h");
+        }};
+        Map<String,Object> expected = new HashMap<String, Object>(){{
+            put("c123d","d");
+            put("c456d","f");
+            put("46","h");
+            put("65","h");
+        }};
+        assertEquals(expected, Maps.extractByPattern(m, "c\\d+d","\\d+"));
+    }
+
 
     @Test
     public void testFilterNull(){

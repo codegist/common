@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 /**
@@ -33,6 +34,52 @@ public final class Maps {
     private Maps() {
     }
 
+    /**
+     * @see Maps#extractByPattern(java.util.Map, java.util.regex.Pattern...)
+     * @param map Map to filter
+     * @param filterRegexes Regex strings to use as key filters
+     * @param <V> Map value type
+     * @return map where keys matches given patterns
+     */
+    public static <V> Map<String,V> extractByPattern(Map<String,V> map, String... filterRegexes){
+        if(filterRegexes == null) return map;
+        Pattern[] patterns = new Pattern[filterRegexes.length];
+        int i = 0;
+        for(String regex : filterRegexes) {
+            patterns[i++] = Pattern.compile(regex);
+        }
+        return extractByPattern(map, patterns);
+    }
+
+    /**
+     * Filters the map elements using given regex pattern over the map keys
+     * @param map Map to filter
+     * @param filterRegexes Pattern to use as key filters
+     * @param <V> Map value type
+     * @return map where keys matches given patterns
+     */
+    public static <V> Map<String,V> extractByPattern(Map<String,V> map, Pattern... filterRegexes){
+        if(filterRegexes == null) return map;
+        Map<String,V> filtered = new HashMap<String,V>();
+        for(Pattern p : filterRegexes){
+            for(Map.Entry<String,V> entry : map.entrySet()){
+                if(!p.matcher(entry.getKey()).matches()) continue;
+                filtered.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return filtered;
+    }
+
+
+    /**
+     * Filter the given map values with the given filter keys.
+     *
+     * @param map Map to filter
+     * @param filterKeys Keys to filter
+     * @param <K> Map key type
+     * @param <V> Map value type
+     * @return filtered map where any keys equals to the given one have been removed
+     */
     public static <K,V> Map<K,V> filter(Map<K,V> map, K... filterKeys){
         if(filterKeys == null) return map;
         Map<K,V> filtered = new HashMap<K,V>();

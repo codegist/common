@@ -23,6 +23,11 @@ package org.codegist.common.lang;
 public final class Validate {
     private Validate(){}
 
+    public static void isTrue(boolean condition, String errorMessage){
+        if(!condition) {
+            throw new IllegalArgumentException(errorMessage);
+        }
+    }
     public static void notNull(Object arg, String errorMessage){
         if(arg == null) {
             throw new IllegalArgumentException(errorMessage);

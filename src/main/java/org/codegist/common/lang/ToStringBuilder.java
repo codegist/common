@@ -137,9 +137,30 @@ public class ToStringBuilder {
     }
 
     public ToStringBuilder append(String name, Object field) {
-        appendComa();
-        sb.append(name).append("=").append(field);
-        return this;
+        if(field == null || !field.getClass().isArray()) {
+            appendComa();
+            sb.append(name).append("=").append(field);
+            return this;
+        } else if (field instanceof long[]) {
+            return append(name, (long[]) field);
+        } else if (field instanceof int[]) {
+            return append(name, (int[]) field);
+        } else if (field instanceof short[]) {
+            return append(name, (short[]) field);
+        } else if (field instanceof char[]) {
+            return append(name, (char[]) field);
+        } else if (field instanceof byte[]) {
+            return append(name, (byte[]) field);
+        } else if (field instanceof double[]) {
+            return append(name, (double[]) field);
+        } else if (field instanceof float[]) {
+            return append(name, (float[]) field);
+        } else if (field instanceof boolean[]) {
+            return append(name, (boolean[]) field);
+        } else {
+            // Not an array of primitives
+            return append(name, (Object[]) field);
+        }
     }
 
     private void appendComa() {
