@@ -22,13 +22,24 @@ package org.codegist.common.reflect;
 
 import java.lang.reflect.Method;
 
+
 /**
+ * Abstract invocation handler that catches toString/equals/hashcode objects methods and executed them. Otherwhise delegate execution to exec method.
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
-public interface ProxyFactory {
+public abstract class ObjectMethodsAwareInvocationHandler implements InvocationHandler {
 
-    <T> T createProxy(ClassLoader classLoader, InvocationHandler handler, Class<?>[] interfaces);
+    protected abstract Object exec(Object proxy, Method method, Object[] args) throws Throwable;
 
-    <T> T createProxy(ClassLoader classLoader, Object target, InvocationHandler handler, Class<?>[] interfaces);
-
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (Methods.isToString(method)) {
+            return this.toString();
+        } else if (Methods.isEquals(method)) {
+            return proxy == args[0];
+        } else if (Methods.isHashCode(method)) {
+            return this.hashCode();
+        } else {
+            return exec(proxy, method, args);
+        }
+    }
 }

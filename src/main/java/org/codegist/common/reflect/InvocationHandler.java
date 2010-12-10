@@ -25,10 +25,8 @@ import java.lang.reflect.Method;
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
-public interface ProxyFactory {
+public interface InvocationHandler {
 
-    <T> T createProxy(ClassLoader classLoader, InvocationHandler handler, Class<?>[] interfaces);
-
-    <T> T createProxy(ClassLoader classLoader, Object target, InvocationHandler handler, Class<?>[] interfaces);
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable;
 
 }
