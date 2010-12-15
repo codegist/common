@@ -36,12 +36,12 @@ class LoggerProvider {
                 put("org.slf4j.LoggerFactory", new LoggerFactory(Slf4jLogger.class));
             }};
 
-    static LoggerFactory getLoggerFactoryForCurrentClasspath() {
+    static LoggerFactory getAvailableLoggerFactory() {
         ClassLoader cloader = ClassLoader.getSystemClassLoader();
-        return getLoggerFactoryForCurrentClasspath(cloader);
+        return getAvailableLoggerFactory(cloader);
     }
 
-    static LoggerFactory getLoggerFactoryForCurrentClasspath(ClassLoader loader) {
+    static LoggerFactory getAvailableLoggerFactory(ClassLoader loader) {
         if(System.getProperty(LOGGER_CLASS_PROP) != null) {
             try {
                 return new LoggerFactory((Class<? extends Logger>)Class.forName(System.getProperty(LOGGER_CLASS_PROP)));

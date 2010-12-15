@@ -29,27 +29,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class LoggerFactoryProviderTest {
+public class LoggerProviderTest {
 
 
     @Test
     public void testLog4jFactory() throws ClassNotFoundException {
         ClassLoader cLoader = mock(ClassLoader.class);
         when(cLoader.loadClass(any(String.class))).thenAnswer(newClassLoaderAnswer("org.apache.log4j.Logger"));
-        LoggerFactory factory = LoggerProvider.getLoggerFactoryForCurrentClasspath(cLoader);
+        LoggerFactory factory = LoggerProvider.getAvailableLoggerFactory(cLoader);
         assertEquals(Log4jLogger.class, factory.getLogger("test").getClass());
     }
     @Test
     public void testSlf4jFactory() throws ClassNotFoundException {
         ClassLoader cLoader = mock(ClassLoader.class);
         when(cLoader.loadClass(any(String.class))).thenAnswer(newClassLoaderAnswer("org.slf4j.LoggerFactory"));
-        LoggerFactory factory = LoggerProvider.getLoggerFactoryForCurrentClasspath(cLoader);
+        LoggerFactory factory = LoggerProvider.getAvailableLoggerFactory(cLoader);
         assertEquals(Slf4jLogger.class, factory.getLogger("test").getClass());
     }
     @Test
     public void testDefaultLogger() throws ClassNotFoundException {
         ClassLoader cLoader = mock(ClassLoader.class);
-        LoggerFactory factory = LoggerProvider.getLoggerFactoryForCurrentClasspath(cLoader);
+        LoggerFactory factory = LoggerProvider.getAvailableLoggerFactory(cLoader);
         assertEquals(NoOpLogger.class, factory.getLogger("test").getClass());
     }
 
@@ -67,7 +67,7 @@ public class LoggerFactoryProviderTest {
                 return null;
             }
         });
-        LoggerProvider.getLoggerFactoryForCurrentClasspath(cLoader);
+        LoggerProvider.getAvailableLoggerFactory(cLoader);
         assertEquals(expectedOrder.length, i.get());
     }
 
