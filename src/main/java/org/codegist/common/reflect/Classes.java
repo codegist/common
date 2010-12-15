@@ -20,13 +20,23 @@
 
 package org.codegist.common.reflect;
 
-/**
- * @author Laurent Gilles (laurent.gilles@codegist.org)
- */
-public interface ProxyFactory {
+public final class Classes {
+    private Classes(){}
 
-    <T> T createProxy(ClassLoader classLoader, InvocationHandler handler, Class<?>[] interfaces);
-
-    <T> T createProxy(ClassLoader classLoader, Object target, InvocationHandler handler, Class<?>[] interfaces);
-
+    public static boolean isClassKnown(String className){
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+    public static boolean isClassKnown(String className, ClassLoader loader){
+        try {
+            Class.forName(className, false, loader);
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
 }

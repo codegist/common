@@ -18,15 +18,39 @@
  * More information at http://www.codegist.org.
  */
 
-package org.codegist.common.reflect;
+package org.codegist.common.log;
 
-/**
- * @author Laurent Gilles (laurent.gilles@codegist.org)
- */
-public interface ProxyFactory {
+public interface Logger {
 
-    <T> T createProxy(ClassLoader classLoader, InvocationHandler handler, Class<?>[] interfaces);
+    boolean isErrorOn();
 
-    <T> T createProxy(ClassLoader classLoader, Object target, InvocationHandler handler, Class<?>[] interfaces);
+    void error(Throwable e, String format, Object... args);
+
+    void error(String format, Object... args);
+
+    boolean isWarnOn();
+
+    void warn(Throwable e, String format, Object... args);
+
+    void warn(String format, Object... args);
+
+    boolean isInfoOn();
+
+    void info(Throwable e, String format, Object... args);
+
+    void info(String format, Object... args);
+
+    boolean isDebugOn();
+
+    void debug(Throwable e, String format, Object... args);
+
+    void debug(String format, Object... args);
+
+
+    boolean isTraceOn();
+
+    void trace(Throwable e, String format, Object... args);
+
+    void trace(String format, Object... args);
 
 }

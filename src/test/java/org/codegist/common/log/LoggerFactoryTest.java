@@ -18,15 +18,19 @@
  * More information at http://www.codegist.org.
  */
 
-package org.codegist.common.reflect;
+package org.codegist.common.log;
 
-/**
- * @author Laurent Gilles (laurent.gilles@codegist.org)
- */
-public interface ProxyFactory {
+import org.junit.Test;
 
-    <T> T createProxy(ClassLoader classLoader, InvocationHandler handler, Class<?>[] interfaces);
+import static org.junit.Assert.assertTrue;
 
-    <T> T createProxy(ClassLoader classLoader, Object target, InvocationHandler handler, Class<?>[] interfaces);
+public class LoggerFactoryTest {
 
+    @Test
+    public void testCache(){
+        LoggerFactory factory = new LoggerFactory(StdOutLogger.class);
+        Logger logger1 = factory.getLogger("test");
+        Logger logger2 = factory.getLogger("test");
+        assertTrue(logger1 == logger2);
+    }
 }

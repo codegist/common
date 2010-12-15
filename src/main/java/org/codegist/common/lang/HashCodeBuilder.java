@@ -38,8 +38,6 @@
  */
 package org.codegist.common.lang;
 
-import java.lang.reflect.Field;
-
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
