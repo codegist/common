@@ -21,8 +21,11 @@
 package org.codegist.common.log;
 
 
-public class Slf4jLogger implements Logger {
-    private org.slf4j.Logger logger;
+import java.io.Serializable;
+
+public class Slf4jLogger implements Logger, Serializable {
+
+    private final transient org.slf4j.Logger logger;
 
     public Slf4jLogger(String name) {
         this.logger = org.slf4j.LoggerFactory.getLogger(name);

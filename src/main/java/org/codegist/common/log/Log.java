@@ -28,7 +28,7 @@ package org.codegist.common.log;
  */
 public final class Log {
 
-    private static final LoggerFactory FACTORY = LoggerProvider.getLoggerFactoryForCurrentClasspath();
+    private static final LoggerFactory FACTORY = LoggerProvider.getAvailableLoggerFactory();
 
     public static Logger getLogger(Class<?> clazz) {
         return FACTORY.getLogger(clazz);

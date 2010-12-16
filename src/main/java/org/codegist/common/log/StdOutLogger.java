@@ -21,13 +21,14 @@
 package org.codegist.common.log;
 
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.Date;
 
-public class StdOutLogger implements Logger {
+public class StdOutLogger implements Logger, Serializable {
 
     private static final String FORMAT = "%tc [%5s] - %s: %s\n";
     private final String name;
-    private final PrintWriter out;
+    private final transient PrintWriter out;
 
     public StdOutLogger(String name) {
         this(new PrintWriter(System.out), name);

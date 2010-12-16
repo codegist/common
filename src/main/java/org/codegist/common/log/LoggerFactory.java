@@ -21,6 +21,7 @@
 package org.codegist.common.log;
 
 import java.lang.ref.Reference;
+import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,7 @@ class LoggerFactory {
      * @param loggerCls Expected class must be a static innerclass of the implementor, with a public constructor with a String argument
      */
     public LoggerFactory(Class<? extends Logger> loggerCls) {
-        this(new HashMap<String, Reference<Logger>>(), loggerCls);
+        this(new HashMap<String, Reference<Logger>>(),loggerCls);
     }
 
     public Logger getLogger(Class<?> clazz) {
@@ -62,5 +63,4 @@ class LoggerFactory {
         }
         return logger;
     }
-
 }

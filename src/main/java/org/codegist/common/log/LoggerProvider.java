@@ -25,7 +25,7 @@ import org.codegist.common.reflect.Classes;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-class LoggerProvider {
+final class LoggerProvider {
     
     static final String LOGGER_CLASS_PROP = "org.codegist.common.log.class";
 
@@ -35,6 +35,8 @@ class LoggerProvider {
                 put("org.apache.log4j.Logger", new LoggerFactory(Log4jLogger.class));
                 put("org.slf4j.LoggerFactory", new LoggerFactory(Slf4jLogger.class));
             }};
+
+    private LoggerProvider(){}
 
     static LoggerFactory getAvailableLoggerFactory() {
         ClassLoader cloader = ClassLoader.getSystemClassLoader();

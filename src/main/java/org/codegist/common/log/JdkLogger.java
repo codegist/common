@@ -20,11 +20,12 @@
 
 package org.codegist.common.log;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 
-public class JdkLogger implements Logger {
+public class JdkLogger implements Logger, Serializable {
 
-    private final java.util.logging.Logger logger;
+    private final transient java.util.logging.Logger logger;
 
     public JdkLogger(String name) {
         this.logger = java.util.logging.Logger.getLogger(name);

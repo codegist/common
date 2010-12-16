@@ -20,10 +20,13 @@
 
 package org.codegist.common.log;
 
+import java.io.Serializable;
+
 /**
  * Default logger implementation, ignore all logging requests.
  */
-public class NoOpLogger implements Logger {
+public class NoOpLogger implements Logger, Serializable {
+
     public boolean isErrorOn() {
         return false;  
     }

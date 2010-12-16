@@ -22,9 +22,11 @@ package org.codegist.common.log;
 
 import org.apache.log4j.Level;
 
-public class Log4jLogger implements Logger {
+import java.io.Serializable;
 
-    private final org.apache.log4j.Logger logger;
+public class Log4jLogger implements Logger, Serializable {
+
+    private final transient org.apache.log4j.Logger logger;
 
     public Log4jLogger(String name) {
         this.logger = org.apache.log4j.Logger.getLogger(name);
