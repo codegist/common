@@ -30,10 +30,10 @@ public abstract class Logger {
     private static final LoggerFactory FACTORY = LoggerProvider.getAvailableLoggerFactory();
 
     /**
-     * Factory method that returns Logger instances that redirects events to the user logging system, guess based on the current system classloader.
+     * Factory method returning Logger instances that redirects events to the user logging system. Detection is based on the current system classloader.
      * <p>Currently supported logging systems are: Log4j, Slf4j, Apache Commons Logging.
-     * <p>If no supported logging system is found in the system classloader, it defaults to {@link org.codegist.common.log.NoOpLogger}.
-     * <p>Setting {@value org.codegist.common.log.LoggerProvider#LOGGER_CLASS_PROP} system property to the fully qualified name of a class implementing {@link Logger} will default to the given logger implementation.
+     * <p>For any other non supported logging system, it defaults to {@link org.codegist.common.log.NoOpLogger}.
+     * <p>Setting "org.codegist.common.log.class" system property to the fully qualified name of a class implementing {@link Logger} will default to the given logger implementation.
      *
      * @param name logger name
      * @return logger instance
@@ -50,8 +50,6 @@ public abstract class Logger {
     public static Logger getLogger(Class<?> clazz) {
         return FACTORY.getLogger(clazz);
     }
-
-    /********** INTERFACE METHODS **********/
 
     public abstract boolean isErrorOn();
     public abstract void error(Throwable e, String format, Object... args);

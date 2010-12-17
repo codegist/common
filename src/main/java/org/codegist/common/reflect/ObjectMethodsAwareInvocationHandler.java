@@ -24,12 +24,12 @@ import java.lang.reflect.Method;
 
 
 /**
- * Abstract invocation handler that catches toString/equals/hashcode objects methods and executed them. Otherwhise delegate execution to exec method.
+ * Abstract invocation handler that catches toString/equals/hashcode objects methods and executed them. Otherwhise delegate execution to doInvoke method.
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public abstract class ObjectMethodsAwareInvocationHandler implements InvocationHandler {
 
-    protected abstract Object exec(Object proxy, Method method, Object[] args) throws Throwable;
+    protected abstract Object doInvoke(Object proxy, Method method, Object[] args) throws Throwable;
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (Methods.isToString(method)) {
@@ -39,7 +39,7 @@ public abstract class ObjectMethodsAwareInvocationHandler implements InvocationH
         } else if (Methods.isHashCode(method)) {
             return this.hashCode();
         } else {
-            return exec(proxy, method, args);
+            return doInvoke(proxy, method, args);
         }
     }
 }

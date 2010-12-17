@@ -109,11 +109,13 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.6.0</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.0</version>
+            <optional>true</optional>
         </dependency>
         <!--Declared as optional, only needed when org.codegist.common.marshall.JacksonMarshaller is used -->
         <dependency>
