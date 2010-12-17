@@ -34,6 +34,7 @@ import static org.junit.Assert.*;
  */
 public class UrlsTest {
 
+
     @Test
     public void testEncode() throws UnsupportedEncodingException {
         Map<String, String> map = new HashMap<String, String>();
@@ -110,22 +111,22 @@ public class UrlsTest {
         assertEquals(EXPECTED_ISO88591, Urls.buildQueryString(PARAMS, "ISO-8859-1"));
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testParseNull() throws UnsupportedEncodingException {
         assertTrue(Urls.parseQueryString((String) null).isEmpty());
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testParseNull2() throws UnsupportedEncodingException {
         assertTrue(Urls.parseQueryString((URI) null).isEmpty());
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testParseNull3() throws UnsupportedEncodingException {
         assertTrue(Urls.parseQueryString((String) null, null).isEmpty());
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testParseNull4() throws UnsupportedEncodingException {
         assertTrue(Urls.parseQueryString((URI) null, null).isEmpty());
     }

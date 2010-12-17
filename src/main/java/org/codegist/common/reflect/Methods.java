@@ -70,7 +70,7 @@ public final class Methods {
      * @return true if the given method is the Object.equals() method
      */
     public static boolean isEquals(Method method) {
-        if (method == null || !method.getName().equals("equals")) {
+        if (!method.getName().equals("equals")) {
             return false;
         }
         Class<?>[] paramTypes = method.getParameterTypes();
@@ -84,7 +84,7 @@ public final class Methods {
      * @return true if the given method is the Object.hashCode() method
      */
     public static boolean isHashCode(Method method) {
-        return (method != null && method.getName().equals("hashCode") && method.getParameterTypes().length == 0);
+        return (method.getName().equals("hashCode") && method.getParameterTypes().length == 0);
     }
 
     /**
@@ -94,7 +94,7 @@ public final class Methods {
      * @return true if the given method is the Object.toString() method
      */
     public static boolean isToString(Method method) {
-        return (method != null && method.getName().equals("toString") && method.getParameterTypes().length == 0);
+        return (method.getName().equals("toString") && method.getParameterTypes().length == 0);
     }
 
     /**

@@ -35,9 +35,9 @@ import static org.junit.Assert.*;
  */
 public class MethodsTest {
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testIsEqualsNull() {
-        assertFalse(Methods.isEquals(null));
+        Methods.isEquals(null);
     }
 
     @Test
@@ -50,9 +50,9 @@ public class MethodsTest {
         assertFalse(Methods.isEquals(Object.class.getMethod("hashCode")));
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testIsHashCodeNull() {
-        assertFalse(Methods.isHashCode(null));
+        Methods.isHashCode(null);
     }
 
     @Test
@@ -65,9 +65,9 @@ public class MethodsTest {
         assertFalse(Methods.isHashCode(Object.class.getMethod("equals", Object.class)));
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testIsToStringNull() {
-        assertFalse(Methods.isToString(null));
+        Methods.isToString(null);
     }
 
     @Test
@@ -80,9 +80,9 @@ public class MethodsTest {
         assertFalse(Methods.isToString(Object.class.getMethod("hashCode")));
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testIsFromObjectNull() {
-        assertFalse(Methods.isFromObject(null));
+        Methods.isFromObject(null);
     }
 
     @Test

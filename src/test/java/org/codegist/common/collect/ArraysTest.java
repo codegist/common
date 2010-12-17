@@ -23,6 +23,7 @@ package org.codegist.common.collect;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
@@ -57,6 +58,20 @@ public class ArraysTest {
     @Test
     public void testMerge() {
         assertArrayEquals(new String[]{"a", "b", "c", "d"}, Arrays.merge(String.class, new String[0], new String[]{"a", "b"}, new String[0], new String[]{"c", "d"}));
+    }
+
+
+    @Test(expected = NullPointerException.class)
+    public void testJoinNull() {
+        Arrays.join("-", (String[])null);
+    }
+    @Test
+    public void testJoinNull2() {
+        assertEquals("null-null", Arrays.join("-", (String)null, (String)null));
+    }
+    @Test
+    public void testJoin() {
+        assertEquals("a-b-c", Arrays.join("-", "a", "b", "c"));
     }
 
 

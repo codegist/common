@@ -23,6 +23,7 @@ package org.codegist.common.collect;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.TreeSet;
 
 import static org.junit.Assert.assertFalse;
@@ -35,7 +36,12 @@ public class CollectionsTest {
 
     @Test
     public void testNull() {
-        assertTrue(Collections.areEmpties(null));
+        assertTrue(Collections.areEmpties((Collection)null));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testNull2() {
+        Collections.areEmpties((Collection[])null);
     }
 
     @Test

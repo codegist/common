@@ -36,7 +36,6 @@ public final class Collections {
      * @return return true if all the collections are empty or null
      */
     public static boolean areEmpties(Collection... collections) {
-        if (collections == null) return true;
         for (Collection m : collections) {
             if (m != null && !m.isEmpty()) return false;
         }

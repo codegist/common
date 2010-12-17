@@ -42,7 +42,6 @@ public final class Maps {
      * @return map where keys matches given patterns
      */
     public static <V> Map<String,V> extractByPattern(Map<String,V> map, String... filterRegexes){
-        if(filterRegexes == null) return map;
         Pattern[] patterns = new Pattern[filterRegexes.length];
         int i = 0;
         for(String regex : filterRegexes) {
@@ -59,7 +58,6 @@ public final class Maps {
      * @return map where keys matches given patterns
      */
     public static <V> Map<String,V> extractByPattern(Map<String,V> map, Pattern... filterRegexes){
-        if(filterRegexes == null) return map;
         Map<String,V> filtered = new HashMap<String,V>();
         for(Pattern p : filterRegexes){
             for(Map.Entry<String,V> entry : map.entrySet()){

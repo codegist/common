@@ -22,6 +22,8 @@ package org.codegist.common.reflect;
 
 import org.junit.Test;
 
+import java.lang.reflect.Type;
+
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +31,15 @@ import static org.junit.Assert.assertEquals;
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public class TypesTest {
+
+    @Test(expected = NullPointerException.class)
+    public void testIsVoidNull(){
+        Types.isVoid((Class<?>)null);
+    }
+    @Test(expected = NullPointerException.class)
+    public void testIsVoidNull2(){
+        Types.isVoid((Type)null);
+    }
 
     @Test
     public void testDefaultValue() {

@@ -21,6 +21,8 @@
 package org.codegist.common.net;
 
 
+import org.codegist.common.lang.Objects;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
@@ -62,7 +64,6 @@ public final class Urls {
     }
 
     public static String encode(String value, String encoding) throws UnsupportedEncodingException {
-        if (value == null) return "";
         String encoded = URLEncoder.encode(value, encoding);
         StringBuffer buf = new StringBuffer(encoded.length());
         char focus;
@@ -111,7 +112,8 @@ public final class Urls {
      * @return Map of query string parameters
      */
     public static Map<String, String> parseQueryString(URI uri, String encoding) {
-        return uri == null ? new LinkedHashMap<String, String>() : parseQueryString(uri.getRawQuery(), encoding);
+        String qs = Objects.defaultIfNull(uri.getRawQuery(), "");
+        return parseQueryString(qs, encoding);
     }
 
     /**
@@ -123,19 +125,17 @@ public final class Urls {
      */
     public static Map<String, String> parseQueryString(String queryString, String encoding) {
         Map<String, String> params = new LinkedHashMap<String, String>();
-        if (queryString != null && queryString.length() > 0) {
-            Scanner scanner = new Scanner(queryString).useDelimiter("&");
-            while (scanner.hasNext()) {
-                final String[] nameValue = scanner.next().split("=");
-                if (nameValue.length == 0 || nameValue.length > 2)
-                    throw new IllegalArgumentException("Invalid parameter!");
+        Scanner scanner = new Scanner(queryString).useDelimiter("&");
+        while (scanner.hasNext()) {
+            final String[] nameValue = scanner.next().split("=");
+            if (nameValue.length == 0 || nameValue.length > 2)
+                throw new IllegalArgumentException("Invalid parameter!");
 
-                final String name = decode(nameValue[0], encoding);
-                String value = null;
-                if (nameValue.length == 2)
-                    value = decode(nameValue[1], encoding);
-                params.put(name, value);
-            }
+            final String name = decode(nameValue[0], encoding);
+            String value = null;
+            if (nameValue.length == 2)
+                value = decode(nameValue[1], encoding);
+            params.put(name, value);
         }
         return params;
     }

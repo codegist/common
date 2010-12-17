@@ -33,9 +33,13 @@ import static org.junit.Assert.*;
  */
 public class MapsTest {
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testExtractByPatternNull(){
         assertNull(Maps.extractByPattern(null, (String[])null));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testExtractByPatternNull2(){
         assertNull(Maps.extractByPattern(null, (Pattern[])null));
     }
 

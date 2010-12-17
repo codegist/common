@@ -53,8 +53,7 @@ public final class Arrays {
         return merge;
     }
 
-    public static String join(String sep, String[] strings){
-        if(strings == null) return "";
+    public static String join(String sep, String... strings){
         StringBuilder sb = new StringBuilder();
         int i = 0, max=strings.length;
         for(String s : strings){

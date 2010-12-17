@@ -91,7 +91,7 @@ public final class Types {
      * @return true if void
      */
     public static boolean isVoid(Type type) {
-        return "void".equals(String.valueOf(type));
+        return "void".equals(type.toString());
     }
 
     /**
