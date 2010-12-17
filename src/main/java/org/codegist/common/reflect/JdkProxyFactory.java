@@ -32,7 +32,7 @@ import java.lang.reflect.Proxy;
 public class JdkProxyFactory implements ProxyFactory {
 
     @SuppressWarnings("unchecked")
-    public <T> T createProxy(ClassLoader classLoader, final Object target, final InvocationHandler handler, Class<?>[] interfaces) {
+    public <T> T createProxy(ClassLoader classLoader, final InvocationHandler handler, Class<?>[] interfaces, final Object target) {
         return (T) Proxy.newProxyInstance(classLoader, interfaces, new DelegatorHandler(target, handler));
     }
 
@@ -52,6 +52,6 @@ public class JdkProxyFactory implements ProxyFactory {
     }
 
     public <T> T createProxy(ClassLoader classLoader, final InvocationHandler handler, Class<?>[] interfaces) {
-        return this.<T>createProxy(classLoader, null, handler, interfaces);
+        return this.<T>createProxy(classLoader, handler, interfaces, null);
     }
 }

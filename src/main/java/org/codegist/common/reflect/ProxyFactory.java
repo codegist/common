@@ -27,6 +27,6 @@ public interface ProxyFactory {
 
     <T> T createProxy(ClassLoader classLoader, InvocationHandler handler, Class<?>[] interfaces);
 
-    <T> T createProxy(ClassLoader classLoader, Object target, InvocationHandler handler, Class<?>[] interfaces);
+    <T> T createProxy(ClassLoader classLoader, InvocationHandler handler, Class<?>[] interfaces, Object target);
 
 }
