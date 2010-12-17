@@ -29,6 +29,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
 public class LoggerProviderTest {
 
 
@@ -57,7 +60,8 @@ public class LoggerProviderTest {
     public void testLoggerTryOrder() throws ClassNotFoundException {
         final String[] expectedOrder = {
                 "org.apache.log4j.Logger",
-                "org.slf4j.LoggerFactory"
+                "org.slf4j.LoggerFactory",
+                "org.apache.commons.logging.LogFactory"
         };
         ClassLoader cLoader = mock(ClassLoader.class);
         final AtomicInteger i = new AtomicInteger();

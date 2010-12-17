@@ -23,7 +23,12 @@ package org.codegist.common.log;
 import java.io.Serializable;
 import java.util.logging.Level;
 
-public class JdkLogger implements Logger, Serializable {
+/**
+ * JDK Logger implementation
+ *
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
+public class JdkLogger extends AbstractLogger implements Serializable {
 
     private final transient java.util.logging.Logger logger;
 
@@ -31,67 +36,73 @@ public class JdkLogger implements Logger, Serializable {
         this.logger = java.util.logging.Logger.getLogger(name);
     }
 
-    private String format(String format, Object... args){
-        return args.length > 0 ? String.format(format, args) : format;
+    @Override
+    protected void logError(Object message, Throwable e) {
+        logger.log(Level.SEVERE, String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logError(Object message) {
+        logger.log(Level.SEVERE, String.valueOf(message));
+    }
+
+    @Override
+    protected void logWarn(Object message, Throwable e) {
+        logger.log(Level.WARNING, String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logWarn(Object message) {
+        logger.log(Level.WARNING, String.valueOf(message));
+    }
+
+    @Override
+    protected void logInfo(Object message, Throwable e) {
+        logger.log(Level.INFO, String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logInfo(Object message) {
+        logger.log(Level.INFO, String.valueOf(message));
+    }
+
+    @Override
+    protected void logDebug(Object message, Throwable e) {
+        logger.log(Level.FINE, String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logDebug(Object message) {
+        logger.log(Level.FINE, String.valueOf(message));
+    }
+
+    @Override
+    protected void logTrace(Object message, Throwable e) {
+        logger.log(Level.FINEST, String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logTrace(Object message) {
+        logger.log(Level.FINEST, String.valueOf(message));
     }
 
     public boolean isErrorOn() {
         return logger.isLoggable(Level.SEVERE);
     }
 
-    public void error(Throwable e, String format, Object... args) {
-        logger.log(Level.SEVERE, format(format, args), e);
-    }
-
-    public void error(String format, Object... args) {
-        logger.log(Level.SEVERE, format(format, args));
-    }
-
     public boolean isWarnOn() {
         return logger.isLoggable(Level.WARNING);
-    }
-
-    public void warn(Throwable e, String format, Object... args) {
-        logger.log(Level.WARNING, format(format, args), e);
-    }
-
-    public void warn(String format, Object... args) {
-        logger.log(Level.WARNING, format(format, args));
     }
 
     public boolean isInfoOn() {
         return logger.isLoggable(Level.INFO);
     }
 
-    public void info(Throwable e, String format, Object... args) {
-        logger.log(Level.INFO, format(format, args), e);
-    }
-
-    public void info(String format, Object... args) {
-        logger.log(Level.INFO, format(format, args));
-    }
-
     public boolean isDebugOn() {
         return logger.isLoggable(Level.FINE);
     }
 
-    public void debug(Throwable e, String format, Object... args) {
-        logger.log(Level.FINE, format(format, args), e);
-    }
-
-    public void debug(String format, Object... args) {
-        logger.log(Level.FINE, format(format, args));
-    }
-
     public boolean isTraceOn() {
         return logger.isLoggable(Level.FINEST);
-    }
-
-    public void trace(Throwable e, String format, Object... args) {
-        logger.log(Level.FINEST, format(format, args), e);
-    }
-
-    public void trace(String format, Object... args) {
-        logger.log(Level.FINEST, format(format, args));
     }
 }

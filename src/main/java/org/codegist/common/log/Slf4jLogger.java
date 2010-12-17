@@ -23,7 +23,12 @@ package org.codegist.common.log;
 
 import java.io.Serializable;
 
-public class Slf4jLogger implements Logger, Serializable {
+/**
+ * Slf4j Logger implementation
+ *
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
+public class Slf4jLogger extends AbstractLogger implements Serializable {
 
     private final transient org.slf4j.Logger logger;
 
@@ -31,67 +36,73 @@ public class Slf4jLogger implements Logger, Serializable {
         this.logger = org.slf4j.LoggerFactory.getLogger(name);
     }
 
-    private String format(String format, Object... args) {
-        return args.length > 0 ? String.format(format, args) : format;
+    @Override
+    protected void logError(Object message, Throwable e) {
+        this.logger.error(String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logError(Object message) {
+        this.logger.error(String.valueOf(message));
+    }
+
+    @Override
+    protected void logWarn(Object message, Throwable e) {
+        this.logger.warn(String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logWarn(Object message) {
+        this.logger.warn(String.valueOf(message));
+    }
+
+    @Override
+    protected void logInfo(Object message, Throwable e) {
+        this.logger.info(String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logInfo(Object message) {
+        this.logger.info(String.valueOf(message));
+    }
+
+    @Override
+    protected void logDebug(Object message, Throwable e) {
+        this.logger.debug(String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logDebug(Object message) {
+        this.logger.debug(String.valueOf(message));
+    }
+
+    @Override
+    protected void logTrace(Object message, Throwable e) {
+        this.logger.trace(String.valueOf(message), e);
+    }
+
+    @Override
+    protected void logTrace(Object message) {
+        this.logger.trace(String.valueOf(message));
     }
 
     public boolean isErrorOn() {
         return logger.isErrorEnabled();
     }
 
-    public void error(Throwable e, String format, Object... args) {
-        logger.error(format(format, args), e);
-    }
-
-    public void error(String format, Object... args) {
-        logger.error(format(format, args));
-    }
-
     public boolean isWarnOn() {
         return logger.isWarnEnabled();
-    }
-
-    public void warn(Throwable e, String format, Object... args) {
-        logger.warn(format(format, args), e);
-    }
-
-    public void warn(String format, Object... args) {
-        logger.warn(format(format, args));
     }
 
     public boolean isInfoOn() {
         return logger.isInfoEnabled();
     }
 
-    public void info(Throwable e, String format, Object... args) {
-        logger.info(format(format, args), e);
-    }
-
-    public void info(String format, Object... args) {
-        logger.info(format(format, args));
-    }
-
     public boolean isDebugOn() {
         return logger.isDebugEnabled();
     }
 
-    public void debug(Throwable e, String format, Object... args) {
-        logger.debug(format(format, args), e);
-    }
-
-    public void debug(String format, Object... args) {
-        logger.debug(format(format, args));
-    }
-
     public boolean isTraceOn() {
         return logger.isTraceEnabled();
-    }
-
-    public void trace(Throwable e, String format, Object... args) {
-        logger.trace(format(format, args), e);
-    }
-
-    public void trace(String format, Object... args) {
-        logger.trace(format(format, args));
     }
 }

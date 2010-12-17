@@ -23,67 +23,108 @@ package org.codegist.common.log;
 import java.io.Serializable;
 
 /**
- * Default logger implementation, ignore all logging requests.
+ * Logger implementation that discards all logging events.
+ *
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
-public class NoOpLogger implements Logger, Serializable {
-
+public class NoOpLogger extends Logger implements Serializable {
     public boolean isErrorOn() {
-        return false;  
+        return false;
     }
 
     public void error(Throwable e, String format, Object... args) {
-        
+
+    }
+
+    public void error(Throwable e, Object message) {
+
     }
 
     public void error(String format, Object... args) {
-        
+
+    }
+
+    public void error(Object message) {
+
     }
 
     public boolean isWarnOn() {
-        return false;  
+        return false;
     }
 
     public void warn(Throwable e, String format, Object... args) {
-        
+
+    }
+
+    public void warn(Throwable e, Object message) {
+
     }
 
     public void warn(String format, Object... args) {
-        
+
+    }
+
+    public void warn(Object message) {
+
     }
 
     public boolean isInfoOn() {
-        return false;  
+        return false;
     }
 
     public void info(Throwable e, String format, Object... args) {
-        
+
+    }
+
+    public void info(Throwable e, Object message) {
+
     }
 
     public void info(String format, Object... args) {
-        
+
+    }
+
+    public void info(Object message) {
+
     }
 
     public boolean isDebugOn() {
-        return false;  
+        return false;
     }
 
     public void debug(Throwable e, String format, Object... args) {
-        
+
+    }
+
+    public void debug(Throwable e, Object message) {
+
     }
 
     public void debug(String format, Object... args) {
-        
+
+    }
+
+    public void debug(Object message) {
+
     }
 
     public boolean isTraceOn() {
-        return false;  
+        return false;
     }
 
     public void trace(Throwable e, String format, Object... args) {
-        
+
+    }
+
+    public void trace(Throwable e, Object message) {
+
     }
 
     public void trace(String format, Object... args) {
-        
+
+    }
+
+    public void trace(Object message) {
+
     }
 }

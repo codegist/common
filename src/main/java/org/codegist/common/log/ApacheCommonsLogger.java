@@ -1,17 +1,17 @@
 /*
  * Copyright 2010 CodeGist.org
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * ===================================================================
  *
@@ -20,21 +20,19 @@
 
 package org.codegist.common.log;
 
-import org.apache.log4j.Level;
-
 import java.io.Serializable;
 
 /**
- * Log4j Logger implementation
+ * Apache commons logging Logger implementation
  *
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
-public class Log4jLogger extends AbstractLogger implements Serializable {
+public class ApacheCommonsLogger extends AbstractLogger implements Serializable {
 
-    private final transient org.apache.log4j.Logger logger;
+    private final transient org.apache.commons.logging.Log logger;
 
-    public Log4jLogger(String name) {
-        this.logger = org.apache.log4j.Logger.getLogger(name);
+    public ApacheCommonsLogger(String name) {
+        this.logger = org.apache.commons.logging.LogFactory.getLog(name);
     }
 
     @Override
@@ -88,22 +86,22 @@ public class Log4jLogger extends AbstractLogger implements Serializable {
     }
 
     public boolean isErrorOn() {
-        return logger.isEnabledFor(Level.ERROR);
+        return logger.isErrorEnabled();
     }
 
     public boolean isWarnOn() {
-        return logger.isEnabledFor(Level.WARN);
+        return logger.isWarnEnabled();
     }
 
     public boolean isInfoOn() {
-        return logger.isEnabledFor(Level.INFO);
+        return logger.isInfoEnabled();
     }
 
     public boolean isDebugOn() {
-        return logger.isEnabledFor(Level.DEBUG);
+        return logger.isDebugEnabled();
     }
 
     public boolean isTraceOn() {
-        return logger.isEnabledFor(Level.TRACE);
+        return logger.isTraceEnabled();
     }
 }

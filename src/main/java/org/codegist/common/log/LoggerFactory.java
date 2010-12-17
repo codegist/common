@@ -21,12 +21,15 @@
 package org.codegist.common.log;
 
 import java.lang.ref.Reference;
-import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
 class LoggerFactory {
+
     private final Map<String, Reference<Logger>> flyweight;
     private final Class<? extends Logger> loggerCls;
 
@@ -39,7 +42,7 @@ class LoggerFactory {
      * @param loggerCls Expected class must be a static innerclass of the implementor, with a public constructor with a String argument
      */
     public LoggerFactory(Class<? extends Logger> loggerCls) {
-        this(new HashMap<String, Reference<Logger>>(),loggerCls);
+        this(new HashMap<String, Reference<Logger>>(), loggerCls);
     }
 
     public Logger getLogger(Class<?> clazz) {
@@ -52,11 +55,11 @@ class LoggerFactory {
         if (logger == null) {
             try {
                 logger = loggerCls.getConstructor(String.class).newInstance(name);
-            } catch (Exception e) {
+            } catch (Exception retry) {
                 try {
                     logger = loggerCls.newInstance();
-                } catch (Exception e1) {
-                    throw new RuntimeException(e1);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
             flyweight.put(name, new SoftReference<Logger>(logger));

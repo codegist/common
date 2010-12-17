@@ -24,6 +24,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
 public class LoggerFactoryTest {
 
     @Test

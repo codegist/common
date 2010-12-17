@@ -25,8 +25,11 @@ import org.codegist.common.reflect.Classes;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
 final class LoggerProvider {
-    
+
     static final String LOGGER_CLASS_PROP = "org.codegist.common.log.class";
 
     private static final LoggerFactory DEFAULT_FACTORY = new LoggerFactory(NoOpLogger.class);
@@ -34,9 +37,11 @@ final class LoggerProvider {
             new LinkedHashMap<String, LoggerFactory>() {{
                 put("org.apache.log4j.Logger", new LoggerFactory(Log4jLogger.class));
                 put("org.slf4j.LoggerFactory", new LoggerFactory(Slf4jLogger.class));
+                put("org.apache.commons.logging.LogFactory", new LoggerFactory(ApacheCommonsLogger.class));
             }};
 
-    private LoggerProvider(){}
+    private LoggerProvider() {
+    }
 
     static LoggerFactory getAvailableLoggerFactory() {
         ClassLoader cloader = ClassLoader.getSystemClassLoader();
@@ -44,13 +49,13 @@ final class LoggerProvider {
     }
 
     static LoggerFactory getAvailableLoggerFactory(ClassLoader loader) {
-        if(System.getProperty(LOGGER_CLASS_PROP) != null) {
+        if (System.getProperty(LOGGER_CLASS_PROP) != null) {
             try {
-                return new LoggerFactory((Class<? extends Logger>)Class.forName(System.getProperty(LOGGER_CLASS_PROP)));
+                return new LoggerFactory((Class<? extends Logger>) Class.forName(System.getProperty(LOGGER_CLASS_PROP)));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }else{
+        } else {
             for (Map.Entry<String, LoggerFactory> entry : LOGGER_FACTORIES.entrySet()) {
                 if (Classes.isClassKnown(entry.getKey(), loader)) {
                     return entry.getValue();

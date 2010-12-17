@@ -24,86 +24,106 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Date;
 
-public class StdOutLogger implements Logger, Serializable {
+/**
+ * PrintStream Logger implementation.
+ * <p>All levels are enabled, to be used for debugging purposes.
+ *
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
+public class StdOutLogger extends AbstractLogger implements Serializable {
 
     private static final String FORMAT = "%tc [%5s] - %s: %s\n";
     private final String name;
     private final transient PrintWriter out;
 
+    /**
+     * Redirects output to System.out
+     *
+     * @param name Name of the logger
+     */
     public StdOutLogger(String name) {
         this(new PrintWriter(System.out), name);
     }
+
     public StdOutLogger(PrintWriter out, String name) {
         this.out = out;
         this.name = name;
     }
 
-    private void log(String lvl, Throwable error, String format, Object... args) {
-        String msg = (args.length == 0 ? format : String.format(format, args)).replaceAll("%","%%");
+    private void log(String lvl, Object message, Throwable error) {
+        String msg = message != null ? message.toString().replaceAll("%", "%%") : null;
         out.format(String.format(FORMAT, new Date().getTime(), lvl, name, msg));
-        if (error != null) {
-            error.printStackTrace(out);
-        }
+        if (error != null) error.printStackTrace(out);
         out.flush();
+    }
+
+    @Override
+    protected void logError(Object message, Throwable e) {
+        log("ERROR", message, e);
+    }
+
+    @Override
+    protected void logError(Object message) {
+        logError(message, null);
+    }
+
+    @Override
+    protected void logWarn(Object message, Throwable e) {
+        log("WARN", message, e);
+    }
+
+    @Override
+    protected void logWarn(Object message) {
+        logWarn(message, null);
+    }
+
+    @Override
+    protected void logInfo(Object message, Throwable e) {
+        log("INFO", message, e);
+    }
+
+    @Override
+    protected void logInfo(Object message) {
+        logInfo(message, null);
+    }
+
+    @Override
+    protected void logDebug(Object message, Throwable e) {
+        log("DEBUG", message, e);
+    }
+
+    @Override
+    protected void logDebug(Object message) {
+        logDebug(message, null);
+    }
+
+    @Override
+    protected void logTrace(Object message, Throwable e) {
+        log("TRACE", message, e);
+    }
+
+    @Override
+    protected void logTrace(Object message) {
+        logTrace(message, null);
     }
 
     public boolean isErrorOn() {
         return true;
     }
 
-    public void error(Throwable e, String format, Object... args) {
-        log("ERROR", e, format, args);
-    }
-
-    public void error(String format, Object... args) {
-        error(null, format, args);
-    }
-
     public boolean isWarnOn() {
         return true;
-    }
-
-    public void warn(Throwable e, String format, Object... args) {
-        log("WARN", e, format, args);
-    }
-
-    public void warn(String format, Object... args) {
-        warn(null, format, args);
     }
 
     public boolean isInfoOn() {
         return true;
     }
 
-    public void info(Throwable e, String format, Object... args) {
-        log("INFO", e, format, args);
-    }
-
-    public void info(String format, Object... args) {
-        info(null, format, args);
-    }
-
     public boolean isDebugOn() {
         return true;
     }
 
-    public void debug(Throwable e, String format, Object... args) {
-        log("DEBUG", e, format, args);
-    }
-
-    public void debug(String format, Object... args) {
-        debug(null, format, args);
-    }
-
     public boolean isTraceOn() {
         return true;
-    }
-
-    public void trace(Throwable e, String format, Object... args) {
-        log("TRACE", e, format, args);
-    }
-
-    public void trace(String format, Object... args) {
-        trace(null, format, args);
     }
 }
