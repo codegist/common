@@ -47,7 +47,7 @@ public final class Strings {
      * Extract all groups defined in the given pattern for the given string
      * @param pattern Pattern containing groups
      * @param src Input string
-     * @return string array of extract groups. Empty if none if find, and the first element correspond to the global match.
+     * @return string array of extract groups. Empty if none is find.  If matcbes, the first element corresponds to the global match.
      */
     public static String[] extractGroups(Pattern pattern, String src){
         Matcher matcher = pattern.matcher(src);
