@@ -79,8 +79,7 @@ public class StringsTest {
         assertArrayEquals(new String[]{";charset=utf-8", null, "utf-8", null},
                 Strings.extractGroups(headerPattern, ";charset=utf-8"));
 
-        assertArrayEquals(new String[]{"", null, "utf-8", null},
-                Strings.extractGroups(headerPattern, ""));
+        assertArrayEquals(new String[]{}, Strings.extractGroups(headerPattern, ""));
     }
 
 }
