@@ -30,6 +30,7 @@ public final class Randoms {
     private static final Random RDM = new Random();
 
     private Randoms() {
+        throw new IllegalStateException();
     }
 
     /**

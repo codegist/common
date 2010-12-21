@@ -21,7 +21,9 @@
 package org.codegist.common.lang;
 
 public final class Numbers {
-    private Numbers(){}
+    private Numbers(){
+        throw new IllegalStateException();
+    }
 
     public static int parse(String str, int defaultValue){
         try {

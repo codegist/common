@@ -21,7 +21,9 @@
 package org.codegist.common.lang;
 
 public final class Validate {
-    private Validate(){}
+    private Validate(){
+        throw new IllegalStateException();
+    }
 
     public static void isTrue(boolean condition, String errorMessage){
         if(!condition) {

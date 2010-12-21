@@ -26,7 +26,9 @@ import java.util.Collection;
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public final class Collections {
+
     private Collections() {
+        throw new IllegalStateException();
     }
 
     /**

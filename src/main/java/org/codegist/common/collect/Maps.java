@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
  */
 public final class Maps {
     private Maps() {
+        throw new IllegalStateException();
     }
 
     /**

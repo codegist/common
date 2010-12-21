@@ -25,6 +25,7 @@ package org.codegist.common.lang;
  */
 public final class Objects {
     private Objects() {
+        throw new IllegalStateException();
     }
 
     /**

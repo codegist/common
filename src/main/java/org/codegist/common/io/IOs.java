@@ -28,6 +28,7 @@ import java.nio.charset.Charset;
  */
 public final class IOs {
     private IOs() {
+        throw new IllegalStateException();
     }
 
     /**

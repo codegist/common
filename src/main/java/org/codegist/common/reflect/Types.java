@@ -35,6 +35,7 @@ import java.util.Map;
  */
 public final class Types {
     private Types() {
+        throw new IllegalStateException();
     }
 
     private static final Map<String, Object> DEFAULTS = Maps.unmodifiable(new HashMap<String, Object>() {{

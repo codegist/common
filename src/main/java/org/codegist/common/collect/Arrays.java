@@ -26,6 +26,7 @@ package org.codegist.common.collect;
 public final class Arrays {
 
     private Arrays() {
+        throw new IllegalStateException();
     }
 
     /**

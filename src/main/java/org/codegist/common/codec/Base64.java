@@ -75,6 +75,7 @@ public final class Base64 {
     private static final int[] IA = new int[256];
 
     private Base64() {
+        throw new IllegalStateException();
     }
 
     static {

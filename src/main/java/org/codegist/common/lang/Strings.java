@@ -20,11 +20,46 @@
 
 package org.codegist.common.lang;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public final class Strings {
     private Strings() {
+        throw new IllegalStateException();
+    }
+
+    /**
+     * Extract all groups defined in the given pattern for the given string
+     * @param pattern Pattern containing groups
+     * @param src Input string
+     * @return string array of extract groups. Empty if none if find, and the first element correspond to the global match.
+     */
+    public static String[] extractGroups(String pattern, String src){
+        return extractGroups(Pattern.compile(pattern), src);
+    }
+
+    /**
+     * Extract all groups defined in the given pattern for the given string
+     * @param pattern Pattern containing groups
+     * @param src Input string
+     * @return string array of extract groups. Empty if none if find, and the first element correspond to the global match.
+     */
+    public static String[] extractGroups(Pattern pattern, String src){
+        Matcher matcher = pattern.matcher(src);
+        boolean matchFound = matcher.find();
+        List<String> groups = new ArrayList<String>();
+        if(matchFound) {
+            // Get all groups for this match
+            for (int i=0; i<=matcher.groupCount(); i++) {
+                groups.add(matcher.group(i));
+            }
+        }
+        return groups.toArray(new String[groups.size()]);
     }
 
     /**

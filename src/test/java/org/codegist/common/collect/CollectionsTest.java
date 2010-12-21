@@ -61,8 +61,6 @@ public class CollectionsTest {
 
     @Test
     public void testNoEmpty() {
-        assertFalse(Collections.areEmpties(new ArrayList<String>() {{
-            add("1");
-        }}, new TreeSet<String>()));
+        assertFalse(Collections.areEmpties(java.util.Arrays.asList("1"), new TreeSet<String>()));
     }
 }

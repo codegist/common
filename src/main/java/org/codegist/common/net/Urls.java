@@ -38,6 +38,7 @@ import java.util.Scanner;
 public final class Urls {
 
     private Urls() {
+        throw new IllegalStateException();
     }
 
     /**

@@ -21,7 +21,9 @@
 package org.codegist.common.reflect;
 
 public final class Classes {
-    private Classes(){}
+    private Classes(){
+        throw new IllegalStateException();
+    }
 
     public static boolean isClassKnown(String className){
         try {

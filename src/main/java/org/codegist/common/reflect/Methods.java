@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
  */
 public final class Methods {
     private Methods() {
+        throw new IllegalStateException();
     }
 
     public static Map<Class<? extends Annotation>, Annotation>[] getParamsAnnotation(Method method) {
