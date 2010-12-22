@@ -38,13 +38,23 @@ public final class Hex {
      * @param data bytes to encode
      * @return hexadecimal string
      */
-    public static String encodeHex(byte[] data) {
+    public static String encodeAsString(byte[] data) {
+        return String.valueOf(encode(data));
+    }
+
+    /**
+     * Encodes the given bytes to hexadecimal char array
+     *
+     * @param data bytes to encode
+     * @return hexadecimal char array
+     */
+    public static char[] encode(byte[] data) {
         char[] c = new char[data.length * 2];
         for (int i = 0, j = 0, l = data.length; i < l; i++) {
             c[j++] = DIGITS[(0xF0 & data[i]) >>> 4];
             c[j++] = DIGITS[0x0F & data[i]];
         }
-        return String.valueOf(c);
+        return c;
     }
 
 }

@@ -20,13 +20,19 @@
 
 package org.codegist.common.lang;
 
+/**
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
+ */
 public final class Disposables {
+
     private Disposables(){
         throw new IllegalStateException();
     }
+
     public static void dispose(Object o){
         if(o instanceof Disposable) {
             ((Disposable)o).dispose();
         }
     }
+
 }
