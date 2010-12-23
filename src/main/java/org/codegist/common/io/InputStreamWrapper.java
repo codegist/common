@@ -28,6 +28,7 @@ import java.io.InputStream;
 
 /**
  * Simple input stream wrapper that delegates all methods calls to the underlying input stream.
+ * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public class InputStreamWrapper extends InputStream {
 
