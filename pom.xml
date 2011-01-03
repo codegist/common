@@ -40,9 +40,9 @@
     </description>
 
     <scm>
-        <connection>scm:git:git://github.com/codegist/common.git</connection>
-        <developerConnection>scm:git:git://github.com/codegist/common.git</developerConnection>
-        <url>git://github.com/codegist/common.git</url>
+        <url>scm:git:git@github.com:codegist/common.git</url>
+        <connection>scm:git:git@github.com:codegist/common.git</connection>
+        <developerConnection>scm:git:git@github.com:codegist/common.git</developerConnection>
     </scm>
 
     <issueManagement>
