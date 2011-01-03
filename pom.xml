@@ -28,7 +28,7 @@
         <relativePath>../</relativePath>
     </parent>
     <artifactId>codegist-common</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>CodeGist Commons</name>
     <packaging>jar</packaging>
     <url>http://common.codegist.org/</url>
