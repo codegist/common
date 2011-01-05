@@ -25,9 +25,9 @@
             <meta name="description" content="${project.description}"/>
         </head>
 
-        <!--menu name="Resources">
-            <item name="Downloads" href="downloads.html"/>
-        </menu-->
+        <menu name="Project">
+            <item name="Resources" href="resources.html"/>
+        </menu>
 
         <menu ref="reports"/>
 
