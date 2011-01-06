@@ -69,7 +69,7 @@ public final class Strings {
      * @return return if the string is blank
      */
     public static boolean isBlank(String str) {
-        return str == null || str.trim().isEmpty();
+        return str == null || str.trim().length() == 0;
     }
 
 

@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.codegist</groupId>
         <artifactId>codegist-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>codegist-common</artifactId>
@@ -120,6 +120,13 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.6.0</version>
+            <optional>true</optional>
+        </dependency>
+        <!-- JDK 5 doesn't come with Jaxb -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.1</version>
             <optional>true</optional>
         </dependency>
     </dependencies>

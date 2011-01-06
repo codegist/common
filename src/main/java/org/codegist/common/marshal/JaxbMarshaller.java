@@ -32,20 +32,28 @@ import java.lang.reflect.Type;
  * @see javax.xml.bind.JAXBContext
  */
 public class JaxbMarshaller implements Marshaller, Unmarshaller {
+
     private final JAXBContext jaxbContext;
 
-    public JaxbMarshaller(String modelPackage) throws JAXBException {
-        this(JAXBContext.newInstance(modelPackage));
+    public JaxbMarshaller(String modelPackage) throws MarshallException {
+        try {
+            this.jaxbContext = JAXBContext.newInstance(modelPackage);
+        } catch (JAXBException e) {
+            throw new MarshallException(e);
+        }
     }
 
-    public JaxbMarshaller(Class<?> factory) throws JAXBException {
-        this(JAXBContext.newInstance(factory));
+    public JaxbMarshaller(Class<?> factory) throws MarshallException {
+        try {
+            this.jaxbContext = JAXBContext.newInstance(factory);
+        } catch (JAXBException e) {
+            throw new MarshallException(e);
+        }
     }
 
     public JaxbMarshaller(JAXBContext jaxbContext) {
         this.jaxbContext = jaxbContext;
     }
-
 
     public String unmarshall(Object object) {
         StringWriter writer = new StringWriter();
