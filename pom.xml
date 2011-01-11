@@ -37,10 +37,6 @@
         reflection and more.
     </description>
 
-    <properties>
-        <site.analytics.account>UA-19826844-3</site.analytics.account>
-    </properties>
-
     <scm>
         <url>https://github.com/codegist/common</url>
         <connection>scm:git:git@github.com:codegist/common.git</connection>
