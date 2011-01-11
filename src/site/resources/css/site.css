@@ -18,18 +18,18 @@
  * More information at http://www.codegist.org.
  */
 
-#bannerLeft {
-    float: left;
-}
-
-#banner {
-    background-image: none !important;
-}
-
-a.externalLink,
-a.externalLink:link,
-a.externalLink:visited,
-a.externalLink:active,
-a.externalLink:hover {
-    padding-right: 0px;
-}
+/*#bannerLeft {*/
+    /*float: left;*/
+/*}*/
+/**/
+/*#banner {*/
+    /*background-image: none !important;*/
+/*}*/
+/**/
+/*a.externalLink,*/
+/*a.externalLink:link,*/
+/*a.externalLink:visited,*/
+/*a.externalLink:active,*/
+/*a.externalLink:hover {*/
+    /*padding-right: 0px;*/
+/*}*/
