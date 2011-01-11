@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>http://common.codegist.org/changes-report.html</loc>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/license.html</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/resources.html</loc>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/dependencies.html</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/project-info.html</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/index.html</loc>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/project-reports.html</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/source-repository.html</loc>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/issue-tracking.html</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/project-summary.html</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>http://common.codegist.org/team-list.html</loc>
+        <priority>0.5</priority>
+    </url>
+
+</urlset>
