@@ -44,7 +44,7 @@ final class LoggerProvider {
     }
 
     static LoggerFactory getAvailableLoggerFactory() {
-        ClassLoader cloader = ClassLoader.getSystemClassLoader();
+        ClassLoader cloader = LoggerProvider.class.getClassLoader();
         return getAvailableLoggerFactory(cloader);
     }
 

@@ -190,7 +190,7 @@ public final class Types {
      * @return the Type An instance of <tt>ParameterizedType</tt>
      */
     public static ParameterizedType newType(Class<?> holder, Type[] actualTypeArguments, Type ownerType) {
-        return ParameterizedTypeImpl.make(holder, actualTypeArguments, ownerType);
+        return new ParameterizedTypeImpl(holder, actualTypeArguments, ownerType);
     }
 
 
