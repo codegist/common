@@ -26,6 +26,11 @@
         <author email="laurent.gilles@codegist.org">Laurent Gilles</author>
     </properties>
     <body>
+        <release version="1.0.2" date="2011-02-10" description="minor patch">
+            <action dev="lgilles" type="fix">
+                Fixed logger classpath available implementation detection.
+            </action>
+        </release>
         <release version="1.0.1" date="2011-01-07" description="Compatibility patch">
             <action dev="lgilles" type="add">
                 Added optional dependency on JAXB 2.1, as it doesn't come with java 1.5.
