@@ -20,10 +20,13 @@
 
 package org.codegist.common.marshal;
 
+import org.codegist.common.collect.Maps;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 /**
  * Xml Marshaller and Unmarshaller based on jdk's {@link javax.xml.bind.JAXBContext}.
@@ -32,6 +35,10 @@ import java.lang.reflect.Type;
  * @see javax.xml.bind.JAXBContext
  */
 public class JaxbMarshaller implements Marshaller, Unmarshaller {
+
+    public static final String MODEL_PACKAGE_PROP = JaxbMarshaller.class.getName() + "#model-package";
+    public static final String MODEL_FACTORY_PROP = JaxbMarshaller.class.getName() + "#model-factory";
+    public static final String USER_JAXB_CONTEXT_PROP = JaxbMarshaller.class.getName() + "#jaxb-context";
 
     private final JAXBContext jaxbContext;
 
@@ -53,6 +60,23 @@ public class JaxbMarshaller implements Marshaller, Unmarshaller {
 
     public JaxbMarshaller(JAXBContext jaxbContext) {
         this.jaxbContext = jaxbContext;
+    }
+
+    public JaxbMarshaller(Map<String,Object> config) {
+        config = Maps.defaultsIfNull(config);
+        try {
+            if(config.containsKey(MODEL_FACTORY_PROP)) {
+                this.jaxbContext = JAXBContext.newInstance((Class) config.get(MODEL_FACTORY_PROP));
+            }else if(config.containsKey(MODEL_PACKAGE_PROP)) {
+                this.jaxbContext = JAXBContext.newInstance((String) config.get(MODEL_PACKAGE_PROP));
+            }else if(config.containsKey(USER_JAXB_CONTEXT_PROP)) {
+                this.jaxbContext = (JAXBContext) config.get(USER_JAXB_CONTEXT_PROP);
+            }else{
+                throw new IllegalArgumentException("Illegal jaxb config");
+            }
+        } catch (JAXBException e) {
+            throw new MarshallException(e);
+        }
     }
 
     public String unmarshall(Object object) {

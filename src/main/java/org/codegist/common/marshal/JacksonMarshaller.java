@@ -20,6 +20,7 @@
 
 package org.codegist.common.marshal;
 
+import org.codegist.common.collect.Maps;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
@@ -36,6 +37,9 @@ import java.util.Map;
  */
 public class JacksonMarshaller implements Marshaller, Unmarshaller {
 
+    public static final String USER_OBJECT_MAPPER_PROP = JacksonMarshaller.class.getName() + "#user-object-mapper";
+    public static final String DESERIALIZATION_CONFIG_MAP_PROP = JacksonMarshaller.class.getName() + "#deserialization-config-map";
+
     private final ObjectMapper jackson;
 
     public JacksonMarshaller() {
@@ -43,18 +47,27 @@ public class JacksonMarshaller implements Marshaller, Unmarshaller {
     }
 
     public JacksonMarshaller(ObjectMapper jackson) {
-        this(jackson, null);
-    }
-
-    public JacksonMarshaller(ObjectMapper jackson, Map<String, Boolean> deserializationConfig) {
         this.jackson = jackson;
-        if (deserializationConfig != null) {
-            for (Map.Entry<String, Boolean> entry : deserializationConfig.entrySet()) {
-                jackson.configure(DeserializationConfig.Feature.valueOf(entry.getKey()), entry.getValue());
-            }
-        }
     }
 
+    public JacksonMarshaller(Map<String, Object> config) {
+        config = Maps.defaultsIfNull(config);
+        ObjectMapper mapper = null;
+        if(config.containsKey(USER_OBJECT_MAPPER_PROP)) {
+            mapper = (ObjectMapper) config.get(USER_OBJECT_MAPPER_PROP);
+        }else{
+            mapper = new ObjectMapper();
+        }
+        if(config.containsKey(DESERIALIZATION_CONFIG_MAP_PROP)) {
+            Map<String, Boolean> deserializationConfig = (Map<String, Boolean>) config.get(DESERIALIZATION_CONFIG_MAP_PROP);
+            for (Map.Entry<String, Boolean> entry : deserializationConfig.entrySet()) {
+                mapper = mapper.configure(DeserializationConfig.Feature.valueOf(entry.getKey()), entry.getValue());
+            }
+        }else{
+            mapper = mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        }
+        this.jackson = mapper;
+    }
 
     public String unmarshall(Object object) {
         Writer w = new StringWriter();
