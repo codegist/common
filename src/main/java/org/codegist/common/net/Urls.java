@@ -156,5 +156,60 @@ public final class Urls {
         }
     }
 
+    /**
+     * Indicates if the given url has a query string
+     * @param url Given url, supposed to be a valid url
+     * @return true if a query string is present
+     */
+    public static boolean hasQueryString(String url){
+        int index = url.indexOf('?');
+        return index != -1 && index < url.length();
+    }
+
+    /**
+     * Remove any double-slash occurence in the url path
+     * @param url Given url, supposed to be a valid url
+     * @return slash normalized url
+     */
+    public static String normalizeSlashes(String url){
+        String protocol, server, queryString = null;
+        if(hasQueryString(url)) {
+            queryString  = url.substring(url.indexOf('?'));
+            url = url.substring(0, url.indexOf('?'));
+        }
+        int sepP = url.indexOf("://");
+        int sepPEnd = sepP + 3;
+        int firstSlash = url.indexOf('/', sepPEnd);
+        protocol = url.substring(0, sepP);
+        if(firstSlash > -1) {
+            server = url.substring(sepPEnd, url.indexOf('/', sepPEnd));
+            url =url.substring(url.indexOf('/', sepPEnd)); 
+        }else{
+            server = url.substring(sepPEnd);
+            url = "";
+        }
+        StringBuilder urlsb = new StringBuilder().append(protocol).append("://").append(server);
+        if(url.length() > 1) {
+            char pre = url.charAt(0);
+            urlsb.append(pre);
+            for(int i = 1; i < url.length(); i++){
+                char c = url.charAt(i);
+                if(pre != '/' || c != '/') {
+                    urlsb.append(c);
+                }
+                pre = c;
+
+            }
+        }else if(url.length() > 0){
+            urlsb.append(url);
+        }
+
+        if(queryString != null) {
+            return urlsb.append(queryString).toString();
+        }else{
+            return urlsb.toString();
+        }
+    }
+
 }
 

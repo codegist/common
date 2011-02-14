@@ -33,6 +33,35 @@ import static org.junit.Assert.*;
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public class UrlsTest {
+    @Test(expected = NullPointerException.class)
+    public void testHasQueryStringNull(){
+        Urls.hasQueryString(null);
+    }
+
+    @Test
+    public void testHasQueryString(){
+        assertFalse(Urls.hasQueryString("http://120.0.0.1:8080/hello/world"));
+        assertTrue(Urls.hasQueryString("http://120.0.0.1:8080/hello/world?"));
+        assertTrue(Urls.hasQueryString("http://120.0.0.1:8080/hello/world?d"));
+        assertTrue(Urls.hasQueryString("http://120.0.0.1:8080/hello/world?d=s"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testNormalizeSlashesNull(){
+        Urls.normalizeSlashes(null);
+    }
+    @Test
+    public void testNormalizeSlashes(){
+        assertEquals("http://120.0.0.1:8080/hello/world?d=s", Urls.normalizeSlashes("http://120.0.0.1:8080/hello/world?d=s"));
+        assertEquals("http://120.0.0.1:8080/hello/world", Urls.normalizeSlashes("http://120.0.0.1:8080/hello/world"));
+        assertEquals("http://120.0.0.1:8080/hello/world/world/?d=s", Urls.normalizeSlashes("http://120.0.0.1:8080/hello//world///world//?d=s"));
+        assertEquals("http://120.0.0.1:8080/hello/world", Urls.normalizeSlashes("http://120.0.0.1:8080//hello//world"));
+        assertEquals("http://120.0.0.1:8080", Urls.normalizeSlashes("http://120.0.0.1:8080"));
+        assertEquals("http://120.0.0.1:8080?sd?sd", Urls.normalizeSlashes("http://120.0.0.1:8080?sd?sd"));
+        assertEquals("http://120.0.0.1:8080/", Urls.normalizeSlashes("http://120.0.0.1:8080/"));
+        assertEquals("http://120.0.0.1:8080/", Urls.normalizeSlashes("http://120.0.0.1:8080//"));
+        assertEquals("http://120.0.0.1:8080/?sdsd", Urls.normalizeSlashes("http://120.0.0.1:8080//?sdsd"));
+    }
 
 
     @Test
