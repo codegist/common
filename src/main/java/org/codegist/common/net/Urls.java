@@ -174,16 +174,18 @@ public final class Urls {
     public static String normalizeSlashes(String url){
         String protocol, server, queryString = null;
         if(hasQueryString(url)) {
-            queryString  = url.substring(url.indexOf('?'));
-            url = url.substring(0, url.indexOf('?'));
+            int questionMark = url.indexOf('?');
+            queryString  = url.substring(questionMark);
+            url = url.substring(0, questionMark);
         }
         int sepP = url.indexOf("://");
         int sepPEnd = sepP + 3;
         int firstSlash = url.indexOf('/', sepPEnd);
+
         protocol = url.substring(0, sepP);
         if(firstSlash > -1) {
-            server = url.substring(sepPEnd, url.indexOf('/', sepPEnd));
-            url =url.substring(url.indexOf('/', sepPEnd)); 
+            server = url.substring(sepPEnd, firstSlash);
+            url =url.substring(firstSlash); 
         }else{
             server = url.substring(sepPEnd);
             url = "";
