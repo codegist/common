@@ -56,29 +56,34 @@ public abstract class Logger {
     public abstract void error(Throwable e, Object message);
     public abstract void error(String format, Object... args);
     public abstract void error(Object message);
+    public abstract void error(Throwable error);
 
     public abstract boolean isWarnOn();
     public abstract void warn(Throwable e, String format, Object... args);
     public abstract void warn(Throwable e, Object message);
     public abstract void warn(String format, Object... args);
     public abstract void warn(Object message);
+    public abstract void warn(Throwable error);
 
     public abstract boolean isInfoOn();
     public abstract void info(Throwable e, String format, Object... args);
     public abstract void info(Throwable e, Object message);
     public abstract void info(String format, Object... args);
     public abstract void info(Object message);
+    public abstract void info(Throwable error);
 
     public abstract boolean isDebugOn();
     public abstract void debug(Throwable e, String format, Object... args);
     public abstract void debug(Throwable e, Object message);
     public abstract void debug(String format, Object... args);
     public abstract void debug(Object message);
+    public abstract void debug(Throwable error);
 
     public abstract boolean isTraceOn();
     public abstract void trace(Throwable e, String format, Object... args);
     public abstract void trace(Throwable e, Object message);
     public abstract void trace(String format, Object... args);
     public abstract void trace(Object message);
+    public abstract void trace(Throwable error);
 
 }

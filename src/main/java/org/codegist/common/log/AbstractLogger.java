@@ -37,6 +37,14 @@ public abstract class AbstractLogger extends Logger {
 
     protected abstract void logError(Object message);
 
+    public void error(Throwable error) {
+        try {
+            if (!isErrorOn()) return;
+            logError(error.getMessage(), error);
+        } catch (RuntimeException ignore) {
+        }
+    }
+
     public void error(Throwable e, String format, Object... args) {
         try {
             if (!isErrorOn()) return;
@@ -106,6 +114,14 @@ public abstract class AbstractLogger extends Logger {
         }
     }
 
+    public void warn(Throwable error) {
+        try {
+            if (!isWarnOn()) return;
+            logWarn(error.getMessage(), error);
+        } catch (RuntimeException ignore) {
+        }
+    }
+
 
     protected abstract void logInfo(Object message, Throwable e);
 
@@ -139,6 +155,14 @@ public abstract class AbstractLogger extends Logger {
         try {
             if (!isInfoOn()) return;
             logInfo(message);
+        } catch (RuntimeException ignore) {
+        }
+    }
+
+    public void info(Throwable error) {
+        try {
+            if (!isInfoOn()) return;
+            logInfo(error.getMessage(), error);
         } catch (RuntimeException ignore) {
         }
     }
@@ -180,6 +204,14 @@ public abstract class AbstractLogger extends Logger {
         }
     }
 
+    public void debug(Throwable error) {
+        try {
+            if (!isDebugOn()) return;
+            logDebug(error.getMessage(), error);
+        } catch (RuntimeException ignore) {
+        }
+    }
+
 
     protected abstract void logTrace(Object message, Throwable e);
 
@@ -213,6 +245,14 @@ public abstract class AbstractLogger extends Logger {
         try {
             if (!isTraceOn()) return;
             logTrace(message);
+        } catch (RuntimeException ignore) {
+        }
+    }
+
+    public void trace(Throwable error) {
+        try {
+            if (!isTraceOn()) return;
+            logTrace(error.getMessage(), error);
         } catch (RuntimeException ignore) {
         }
     }

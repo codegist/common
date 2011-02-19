@@ -22,6 +22,7 @@ package org.codegist.common.log;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -54,6 +55,31 @@ public class LoggerTest {
     public static class MyLogger extends Logger {
         public boolean isErrorOn() {
             return false;  
+        }
+
+        @Override
+        public void error(Throwable error) {
+
+        }
+
+        @Override
+        public void warn(Throwable error) {
+
+        }
+
+        @Override
+        public void info(Throwable error) {
+
+        }
+
+        @Override
+        public void debug(Throwable error) {
+
+        }
+
+        @Override
+        public void trace(Throwable error) {
+
         }
 
         public void error(Throwable e, String format, Object... args) {
