@@ -26,8 +26,9 @@ import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 /*
  * Copyright 2003-2004 Sun Microsystems, Inc.  All Rights Reserved.
@@ -140,6 +141,40 @@ public final class Types {
             return null;
         }
     }
+
+    public static Set<Class<?>> getActors(Type type){
+        Set<Class<?>> classes = new HashSet<Class<?>>();
+        fillClasses(type, classes);
+        return classes;
+    }
+
+    private static void fillClasses(Type type, Set<Class<?>> classes){
+        Class<?> clazz = getClass(type);
+        if(clazz != null) {
+            classes.add(clazz);
+        }
+        if (type instanceof ParameterizedType) {
+            for(Type t : ((ParameterizedType) type).getActualTypeArguments()){
+                fillClasses(t, classes);
+            }
+        } else if (type instanceof GenericArrayType) {
+            Type componentType = ((GenericArrayType) type).getGenericComponentType();
+            fillClasses(componentType, classes);       
+        }
+    }
+
+//    static interface C {
+//        Map<Map<String,Long>, TreeMap<List<Integer>, AtomicReference<Queue<LinkedList<Short>[]>>>> t();
+//        List<Set<String>>[][] get();
+//    }
+//    public static void main(String[] args) throws NoSuchMethodException {
+//
+//        Class s = getClass(C.class.getMethod("get").getGenericReturnType());
+//
+//        Set<Class<?>> classes = getActors(C.class.getMethod("t").getGenericReturnType());
+//        System.out.println(classes);
+//        System.out.println(classes.size());
+//    }
 
     /**
      * Returns the type name from the given class. If given type is an array, returns TypeName[].

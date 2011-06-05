@@ -118,13 +118,6 @@ public class UrlsTest {
         Urls.buildQueryString(null, null);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testBuildQueryStringNull2() throws UnsupportedEncodingException {
-        Urls.buildQueryString(new HashMap<String, String>() {{
-            put("", "");
-        }}, null);
-    }
-
     @Test
     public void testBuildQueryStringEmpty() throws UnsupportedEncodingException {
         assertEquals("", Urls.buildQueryString(new HashMap<String, String>(), null));

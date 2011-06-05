@@ -25,6 +25,9 @@ public final class Validate {
         throw new IllegalStateException();
     }
 
+    public static void isFalse(boolean condition, String errorMessage){
+        isTrue(!condition, errorMessage);
+    }
     public static void isTrue(boolean condition, String errorMessage){
         if(!condition) {
             throw new IllegalArgumentException(errorMessage);
@@ -36,7 +39,7 @@ public final class Validate {
         }
     }
 
-    public static void notEmpty(String arg, String errorMessage){
+    public static void notBlank(String arg, String errorMessage){
         if(Strings.isBlank(arg)) {
             throw new IllegalArgumentException(errorMessage);
         }
