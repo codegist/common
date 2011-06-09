@@ -66,4 +66,13 @@ public class LoggingOutputStream extends OutputStream {
             logger.trace("Written data:");
             logger.trace("\n" + sw);
         }
-    }
+
+        @Override
+        protected void finalize() throws Throwable {
+            try {
+                close();
+            }finally {
+                super.finalize();
+            }
+        }
+}

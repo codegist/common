@@ -58,10 +58,10 @@ public final class Arrays {
         return merge;
     }
 
-    public static String join(String sep, String... strings){
+    public static <T> String join(String sep, T... items){
         StringBuilder sb = new StringBuilder();
-        int i = 0, max=strings.length;
-        for(String s : strings){
+        int i = 0, max= items.length;
+        for(T s : items){
             sb.append(s);
             if(++i < max) {
                 sb.append(sep);

@@ -21,9 +21,7 @@
 package org.codegist.common.lang;
 
 import java.lang.reflect.Array;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -50,6 +48,25 @@ public final class Objects {
         return o != null ? o.toString() : defaultIfNull; 
     }
 
+    private static final Object[] EMPTY = new Object[0];
+
+    public static <T> Collection<T> asCollection(T o) {
+        if(o == null) {
+            return Collections.emptyList();
+        }else if (o instanceof Collection) {
+            return (Collection<T>) o;
+        }else if(o.getClass().isArray()) {
+            Collection<T> col = new ArrayList<T>();
+            Iterator<T> iter = new ArrayIterator<T>(o);
+            while(iter.hasNext()){
+                col.add(iter.next());
+            }
+            return col;
+        }else{
+            return Collections.singleton(o);
+        }
+
+    }
     public static <T> Iterator<T> iterate(Object o) {
         if(o == null) {
             return EMPTY_ITERATOR;
