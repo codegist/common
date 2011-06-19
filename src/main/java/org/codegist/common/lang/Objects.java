@@ -21,7 +21,10 @@
 package org.codegist.common.lang;
 
 import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**

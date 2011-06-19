@@ -27,8 +27,6 @@ import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.AtomicReference;
 
 /*
  * Copyright 2003-2004 Sun Microsystems, Inc.  All Rights Reserved.
@@ -139,6 +137,27 @@ public final class Types {
             }
         } else {
             return null;
+        }
+    }
+
+    public static Class<?> getComponentClass(Class<?> clazz, Type genericType){
+        if(clazz.isArray()) {
+            return clazz.getComponentType();
+        }else if(Collection.class.isAssignableFrom(clazz)){
+            Type typeArg = ((ParameterizedType)genericType).getActualTypeArguments()[0];
+            return getClass(typeArg);
+        }else{
+            return clazz;
+        }
+    }
+
+    public static Type getComponentType(Class<?> clazz, Type genericType){
+        if(clazz.isArray()) {
+            return clazz;
+        }else if(Collection.class.isAssignableFrom(clazz)){
+            return ((ParameterizedType)genericType).getActualTypeArguments()[0];
+        }else{
+            return genericType;
         }
     }
 

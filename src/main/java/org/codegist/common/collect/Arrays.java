@@ -20,10 +20,6 @@
 
 package org.codegist.common.collect;
 
-import java.lang.reflect.Array;
-import java.util.Collection;
-import java.util.Iterator;
-
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */

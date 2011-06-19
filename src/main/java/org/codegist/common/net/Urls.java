@@ -158,7 +158,7 @@ public final class Urls {
      * @param encoding encoding
      * @return decoded content
      */
-    static String decode(String content, String encoding) {
+    public static String decode(String content, String encoding) {
         try {
             return URLDecoder.decode(content, encoding);
         } catch (UnsupportedEncodingException problem) {

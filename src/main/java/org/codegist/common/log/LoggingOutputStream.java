@@ -20,8 +20,6 @@
 
 package org.codegist.common.log;
 
-import org.codegist.common.log.Logger;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
