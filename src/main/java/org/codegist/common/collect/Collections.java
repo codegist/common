@@ -43,4 +43,17 @@ public final class Collections {
         }
         return true;
     }
+
+
+    public static <T> String join(String sep, Collection<T> items){
+        StringBuilder sb = new StringBuilder();
+        int i = 0, max= items.size();
+        for(T s : items){
+            sb.append(s);
+            if(++i < max) {
+                sb.append(sep);
+            }
+        }
+        return sb.toString();
+    }
 }
