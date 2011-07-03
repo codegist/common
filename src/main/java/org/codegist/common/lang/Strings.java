@@ -72,6 +72,10 @@ public final class Strings {
         return str == null || str.trim().length() == 0;
     }
 
+    public static boolean isEmpty(String str) {
+        return str == null || str.length() == 0;
+    }
+
 
     /**
      * Checks if the given string is not null and not blank
@@ -83,6 +87,9 @@ public final class Strings {
     public static boolean isNotBlank(String str) {
         return !isBlank(str);
     }
+    public static boolean isNotEmpty(String str) {
+        return !isEmpty(str);
+    }
 
     /**
      * Returns either str if not blank otherwise def
@@ -93,6 +100,10 @@ public final class Strings {
      */
     public static String defaultIfBlank(String str, String def) {
         return isBlank(str) ? def : str;
+    }
+
+    public static String defaultIfEmpty(String str, String def) {
+        return isEmpty(str) ? def : str;
     }
 
 }

@@ -56,13 +56,12 @@ public class LoggingOutputStream extends OutputStream {
         @Override
         public void flush() throws IOException {
             delegate.flush();
+            logger.trace("\n" + sw);
         }
 
         @Override
         public void close() throws IOException {
             delegate.close();
-            logger.trace("Written data:");
-            logger.trace("\n" + sw);
         }
 
         @Override
