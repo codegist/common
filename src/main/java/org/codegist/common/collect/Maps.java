@@ -90,6 +90,17 @@ public final class Maps {
         return filtered;
     }
 
+    public static <K,V> Map<K,V> sub(Map<K,V> map, K... keys){
+        if(keys == null) return map;
+        Map<K,V> filtered = new HashMap<K,V>();
+        List<K> filter = java.util.Arrays.asList(keys);
+        for(Map.Entry<K,V> entry : map.entrySet()){
+            if(!filter.contains(entry.getKey())) continue;
+            filtered.put(entry.getKey(), entry.getValue());
+        }
+        return filtered;
+    }
+
     /**
      * Looks through all the maps and checks if all are null or empty
      *

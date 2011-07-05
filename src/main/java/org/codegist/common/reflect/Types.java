@@ -146,6 +146,14 @@ public final class Types {
         }else if(Collection.class.isAssignableFrom(clazz)){
             Type typeArg = ((ParameterizedType)genericType).getActualTypeArguments()[0];
             return getClass(typeArg);
+        }else if (genericType instanceof GenericArrayType) {
+            Type componentType = ((GenericArrayType) genericType).getGenericComponentType();
+            Class<?> componentClass = getClass(componentType);
+            if (componentClass != null) {
+                return Array.newInstance(componentClass, 0).getClass();
+            } else {
+                return null;
+            }
         }else{
             return clazz;
         }
@@ -153,15 +161,23 @@ public final class Types {
 
     public static Type getComponentType(Class<?> clazz, Type genericType){
         if(clazz.isArray()) {
-            return clazz;
+            return clazz.getComponentType();
         }else if(Collection.class.isAssignableFrom(clazz)){
             return ((ParameterizedType)genericType).getActualTypeArguments()[0];
+        }else if (genericType instanceof GenericArrayType) {
+            Type componentType = ((GenericArrayType) genericType).getGenericComponentType();
+            Class<?> componentClass = getClass(componentType);
+            if (componentClass != null) {
+                return Array.newInstance(componentClass, 0).getClass();
+            } else {
+                return null;
+            }
         }else{
             return genericType;
         }
     }
 
-    public static Set<Class<?>> getActors(Type type){
+  public static Set<Class<?>> getActors(Type type){
         Set<Class<?>> classes = new HashSet<Class<?>>();
         fillClasses(type, classes);
         return classes;
@@ -181,19 +197,6 @@ public final class Types {
             fillClasses(componentType, classes);       
         }
     }
-
-//    static interface C {
-//        Map<Map<String,Long>, TreeMap<List<Integer>, AtomicReference<Queue<LinkedList<Short>[]>>>> t();
-//        List<Set<String>>[][] get();
-//    }
-//    public static void main(String[] args) throws NoSuchMethodException {
-//
-//        Class s = getClass(C.class.getMethod("get").getGenericReturnType());
-//
-//        Set<Class<?>> classes = getActors(C.class.getMethod("t").getGenericReturnType());
-//        System.out.println(classes);
-//        System.out.println(classes.size());
-//    }
 
     /**
      * Returns the type name from the given class. If given type is an array, returns TypeName[].

@@ -48,10 +48,8 @@ public final class Objects {
     }
 
     public static String toString(Object o, String defaultIfNull){
-        return o != null ? o.toString() : defaultIfNull; 
+        return o != null ? o.toString() : defaultIfNull;
     }
-
-    private static final Object[] EMPTY = new Object[0];
 
     public static <T> Collection<T> asCollection(T o) {
         if(o == null) {
