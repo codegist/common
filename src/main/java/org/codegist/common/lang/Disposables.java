@@ -31,7 +31,7 @@ public final class Disposables {
 
     public static void dispose(Object o){
         if(o instanceof Disposable) {
-            ((Disposable)o).dispose();
+            ((Disposable) o).dispose();
         }
     }
 

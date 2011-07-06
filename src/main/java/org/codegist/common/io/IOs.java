@@ -232,12 +232,7 @@ public final class IOs {
      * @param inputStream Input stream to close
      */
     public static void close(InputStream inputStream) {
-        if (inputStream == null) return;
-        try {
-            inputStream.close();
-        } catch (IOException e) {
-            //ignore
-        }
+        close((Closeable) inputStream);
     }
 
     /**
@@ -245,11 +240,15 @@ public final class IOs {
      *
      * @param reader Reader to close
      */
-    public static void close(Reader reader) throws IOException {
-        if (reader == null) return;
+    public static void close(Reader reader) {
+        close((Closeable) reader);
+    }
+
+    public static void close(Closeable closeable) {
+        if(closeable == null) return;
         try {
-            reader.close();
-        } catch (IOException e) {
+            closeable.close();
+        } catch(IOException e) {
             //ignore
         }
     }
