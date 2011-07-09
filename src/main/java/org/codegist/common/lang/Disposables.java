@@ -31,7 +31,17 @@ public final class Disposables {
 
     public static void dispose(Object o){
         if(o instanceof Disposable) {
-            ((Disposable) o).dispose();
+            try {
+                ((Disposable) o).dispose();
+            }catch(Exception e){
+                // ignore
+            }
+        }
+    }
+
+    public static void dispose(Object... os){
+        for(Object o : os){
+            dispose(o);
         }
     }
 

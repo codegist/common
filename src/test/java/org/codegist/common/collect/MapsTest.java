@@ -129,23 +129,23 @@ public class MapsTest {
 
     @Test(expected = NullPointerException.class)
     public void testPutIfNotPresentNull1() {
-        Maps.putIfNotPresent(null, "key", "val");
+        Maps.putIfAbsent(null, "key", "val");
     }
 
     @Test
     public void testPutIfNotPresentNull2() {
         Map<String, String> m = new HashMap<String, String>();
-        assertTrue(Maps.putIfNotPresent(m, null, null));
+        assertTrue(Maps.putIfAbsent(m, null, null));
         assertEquals(null, m.get(null));
-        assertFalse(Maps.putIfNotPresent(m, null, null));
+        assertFalse(Maps.putIfAbsent(m, null, null));
     }
 
     @Test
     public void testPutIfNotPresent() {
         Map<String, String> m = new HashMap<String, String>();
-        assertTrue(Maps.putIfNotPresent(m, "a", "b"));
+        assertTrue(Maps.putIfAbsent(m, "a", "b"));
         assertEquals("b", m.get("a"));
-        assertFalse(Maps.putIfNotPresent(m, "a", "c"));
+        assertFalse(Maps.putIfAbsent(m, "a", "c"));
         assertEquals("b", m.get("a"));
     }
 

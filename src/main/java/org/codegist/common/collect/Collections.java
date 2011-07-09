@@ -21,6 +21,10 @@
 package org.codegist.common.collect;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
@@ -55,5 +59,9 @@ public final class Collections {
             }
         }
         return sb.toString();
+    }
+
+    public static <T> Set<T> asSet(T... values){
+        return new HashSet<T>(asList(values));
     }
 }

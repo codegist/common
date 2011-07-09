@@ -20,6 +20,9 @@
 
 package org.codegist.common.collect;
 
+import java.lang.reflect.Array;
+import java.util.Collection;
+
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
@@ -64,6 +67,10 @@ public final class Arrays {
             }
         }
         return sb.toString();
+    }
+
+    public static <T> T[] arrify(Collection<T> collection, Class<T> clazz){
+        return collection.toArray((T[])Array.newInstance(clazz, collection.size()));
     }
 
 

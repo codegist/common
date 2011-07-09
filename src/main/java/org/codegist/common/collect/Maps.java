@@ -125,7 +125,7 @@ public final class Maps {
      * @param <V>   Value type arg
      * @return true if added
      */
-    public static <K, V> boolean putIfNotPresent(Map<K, V> map, K key, V value) {
+    public static <K, V> boolean putIfAbsent(Map<K, V> map, K key, V value) {
         if (map.containsKey(key)) return false;
         map.put(key, value);
         return true;
@@ -191,6 +191,14 @@ public final class Maps {
             keyList.add(entry.getKey());
         }
         return reverse;
+    }
+
+    public static <K,V> Map<K, V> merge(Map<K, V>... maps){
+        Map<K, V> merged = new HashMap<K,V>();
+        for(Map<K, V> map : maps){
+            merged.putAll(map);
+        }
+        return merged;
     }
 
 }
