@@ -20,28 +20,29 @@
 
 package org.codegist.common.lang;
 
+import static java.lang.String.format;
+
 public final class Validate {
     private Validate(){
         throw new IllegalStateException();
     }
-
-    public static void isFalse(boolean condition, String errorMessage){
-        isTrue(!condition, errorMessage);
+    public static void isFalse(boolean condition, String errorMessage, Object... params){
+        isTrue(!condition, errorMessage, params);
     }
-    public static void isTrue(boolean condition, String errorMessage){
+    public static void isTrue(boolean condition, String errorMessage, Object... params){
         if(!condition) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new IllegalArgumentException(format(errorMessage, params));
         }
     }
-    public static void notNull(Object arg, String errorMessage){
+    public static void notNull(Object arg, String errorMessage, Object... params){
         if(arg == null) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new IllegalArgumentException(format(errorMessage, params));
         }
     }
 
-    public static void notBlank(String arg, String errorMessage){
+    public static void notBlank(String arg, String errorMessage, Object... params){
         if(Strings.isBlank(arg)) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new IllegalArgumentException(format(errorMessage, params));
         }
     }
 
