@@ -80,7 +80,6 @@ public final class Maps {
      * @return filtered map where any keys equals to the given one have been removed
      */
     public static <K,V> Map<K,V> filter(Map<K,V> map, K... filterKeys){
-        if(filterKeys == null) return map;
         Map<K,V> filtered = new HashMap<K,V>();
         List<K> filter = java.util.Arrays.asList(filterKeys);
         for(Map.Entry<K,V> entry : map.entrySet()){
@@ -91,7 +90,6 @@ public final class Maps {
     }
 
     public static <K,V> Map<K,V> sub(Map<K,V> map, K... keys){
-        if(keys == null) return map;
         Map<K,V> filtered = new HashMap<K,V>();
         List<K> filter = java.util.Arrays.asList(keys);
         for(Map.Entry<K,V> entry : map.entrySet()){
