@@ -31,11 +31,14 @@ import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public final class Urls {
+
+    private static final Pattern EQUAL = Pattern.compile("=");
 
     private Urls() {
         throw new IllegalStateException();
@@ -138,7 +141,7 @@ public final class Urls {
         Map<String, String> params = new LinkedHashMap<String, String>();
         Scanner scanner = new Scanner(queryString).useDelimiter("&");
         while (scanner.hasNext()) {
-            final String[] nameValue = scanner.next().split("=");
+            final String[] nameValue = EQUAL.split(scanner.next());
             if (nameValue.length == 0 || nameValue.length > 2)
                 throw new IllegalArgumentException("Invalid parameter!");
 
@@ -149,6 +152,16 @@ public final class Urls {
             params.put(name, value);
         }
         return params;
+    }
+
+    public static String getQueryString(String url){
+        int len = url.length();
+        int query = url.indexOf('?') + 1;
+        if(query != 0 && query < len) {
+            return url.substring(query, len);
+        }else{
+            return null;
+        }
     }
 
     /**

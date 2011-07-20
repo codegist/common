@@ -73,11 +73,6 @@ public class MapsTest {
 
 
     @Test
-    public void testFilterNull(){
-        assertNull(Maps.filter(null, null));
-    }
-
-    @Test
     public void testFilterEmpty(){
         Map m = new HashMap<Object, Object>(){{
             put("a","b");
