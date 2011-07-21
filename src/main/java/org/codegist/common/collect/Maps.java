@@ -20,11 +20,9 @@
 
 package org.codegist.common.collect;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 
 /**
@@ -34,41 +32,6 @@ public final class Maps {
     private Maps() {
         throw new IllegalStateException();
     }
-
-    /**
-     * @see Maps#extractByPattern(java.util.Map, java.util.regex.Pattern...)
-     * @param map Map to filter
-     * @param filterRegexes Regex strings to use as key filters
-     * @param <V> Map value type
-     * @return map where keys matches given patterns
-     */
-    public static <V> Map<String,V> extractByPattern(Map<String,V> map, String... filterRegexes){
-        Pattern[] patterns = new Pattern[filterRegexes.length];
-        int i = 0;
-        for(String regex : filterRegexes) {
-            patterns[i++] = Pattern.compile(regex);
-        }
-        return extractByPattern(map, patterns);
-    }
-
-    /**
-     * Filters the map elements using given regex pattern over the map keys
-     * @param map Map to filter
-     * @param filterRegexes Pattern to use as key filters
-     * @param <V> Map value type
-     * @return map where keys matches given patterns
-     */
-    public static <V> Map<String,V> extractByPattern(Map<String,V> map, Pattern... filterRegexes){
-        Map<String,V> filtered = new HashMap<String,V>();
-        for(Pattern p : filterRegexes){
-            for(Map.Entry<String,V> entry : map.entrySet()){
-                if(!p.matcher(entry.getKey()).matches()) continue;
-                filtered.put(entry.getKey(), entry.getValue());
-            }
-        }
-        return filtered;
-    }
-
 
     /**
      * Filter the given map values with the given filter keys.
@@ -89,30 +52,6 @@ public final class Maps {
         return filtered;
     }
 
-    public static <K,V> Map<K,V> sub(Map<K,V> map, K... keys){
-        Map<K,V> filtered = new HashMap<K,V>();
-        List<K> filter = java.util.Arrays.asList(keys);
-        for(Map.Entry<K,V> entry : map.entrySet()){
-            if(!filter.contains(entry.getKey())) continue;
-            filtered.put(entry.getKey(), entry.getValue());
-        }
-        return filtered;
-    }
-
-    /**
-     * Looks through all the maps and checks if all are null or empty
-     *
-     * @param maps Maps to check
-     * @return return true if all the maps are empty or null
-     */
-    public static boolean areEmpties(Map... maps) {
-        if (maps == null) return true;
-        for (Map m : maps) {
-            if (m != null && !m.isEmpty()) return false;
-        }
-        return true;
-    }
-
     /**
      * Puts a key/value entry in the given map if the key is not present or not null
      *
@@ -129,67 +68,6 @@ public final class Maps {
         return true;
     }
 
-
-    /**
-     * Returns an empty map if given map is null
-     *
-     * @param map the map to check
-     * @param <K> Key type
-     * @param <V> Value type
-     * @return the given map or a new empty one
-     */
-    public static <K, V> Map<K, V> defaultsIfNull(Map<K, V> map) {
-        return map != null ? map : new HashMap<K, V>();
-    }
-
-    /**
-     * Returns an unmodifiable view of the given map, if the map is null, return an unmodifiable empty map.
-     *
-     * @param map The map to get an unmodifiable view from.
-     * @param <K> Key Type
-     * @param <V> Value Type
-     * @return The unmodifiable view of the map.
-     */
-    public static <K, V> Map<K, V> unmodifiable(Map<K, V> map) {
-        return unmodifiable(map, true);
-    }
-
-    /**
-     * Returns an unmodifiable view of the given map, if emptyIfNull is true and the map is null, return an unmodifiable empty map.
-     *
-     * @param map         The map to get an unmodifiable view from.
-     * @param emptyIfNull Indicates whether to get a empty unmodifiable map if null or not.
-     * @param <K>         Key Type
-     * @param <V>         Value Type
-     * @return The unmodifiable view of the map.
-     */
-    public static <K, V> Map<K, V> unmodifiable(Map<K, V> map, boolean emptyIfNull) {
-        if (emptyIfNull)
-            return map != null ? java.util.Collections.unmodifiableMap(map) : java.util.Collections.<K, V>emptyMap();
-        else
-            return map != null ? java.util.Collections.unmodifiableMap(map) : null;
-    }
-
-    /**
-     * Reverse the map, keys become values and values becomes keys.
-     *
-     * @param map The map to reverse
-     * @param <K> Key Type
-     * @param <V> Value Type
-     * @return The reversed map.
-     */
-    public static <K, V> Map<V, List<K>> reverse(Map<K, V> map) {
-        Map<V, List<K>> reverse = new HashMap<V, List<K>>();
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            List<K> keyList = reverse.get(entry.getValue());
-            if (keyList == null) {
-                keyList = new ArrayList<K>();
-                reverse.put(entry.getValue(), keyList);
-            }
-            keyList.add(entry.getKey());
-        }
-        return reverse;
-    }
 
     public static <K,V> Map<K, V> merge(Map<K, V>... maps){
         Map<K, V> merged = new HashMap<K,V>();

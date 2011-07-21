@@ -20,13 +20,7 @@
 
 package org.codegist.common.reflect;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
@@ -34,34 +28,6 @@ import java.util.regex.Pattern;
 public final class Methods {
     private Methods() {
         throw new IllegalStateException();
-    }
-
-    public static Map<Class<? extends Annotation>, Annotation>[] getParamsAnnotation(Method method) {
-        int paramsCount = method.getParameterTypes().length;
-        Map<Class<? extends Annotation>, Annotation>[] paramAnnotations = new Map[paramsCount];
-        for (int i = 0; i < paramsCount; i++) {
-            paramAnnotations[i] = getParamsAnnotation(method, i);
-        }
-        return paramAnnotations;
-    }
-
-    public static Map<Class<? extends Annotation>, Annotation> getParamsAnnotation(Method method, int index) {
-        Annotation[] annotations = method.getParameterAnnotations()[index];
-        Map<Class<? extends Annotation>, Annotation> paramAnnotations = new LinkedHashMap<Class<? extends Annotation>, Annotation>();
-        for (Annotation anno : annotations) {
-            paramAnnotations.put(anno.annotationType(), anno);
-        }
-        return paramAnnotations;
-    }
-
-    /**
-     * Returns true if the given method is either equals()/hashCode()/toString() method.
-     *
-     * @param method Method to check
-     * @return true if the given method is either equals()/hashCode()/toString() method
-     */
-    public static boolean isFromObject(Method method) {
-        return isEquals(method) || isHashCode(method) || isToString(method);
     }
 
     /**
@@ -98,65 +64,4 @@ public final class Methods {
         return (method.getName().equals("toString") && method.getParameterTypes().length == 0);
     }
 
-    /**
-     * Returns the declared method array of the given class that matches the given name regex pattern.
-     *
-     * @param clazz   Class to check
-     * @param pattern name pattern
-     * @return method array matching the given pattern
-     */
-    public static Method[] getDeclaredMethodsThatMatches(Class clazz, String pattern) {
-        return getDeclaredMethodsThatMatches(clazz, Pattern.compile(pattern));
-    }
-
-    /**
-     * Returns the declared method array of the given class that matches the given name regex pattern.
-     *
-     * @param clazz   Class to check
-     * @param pattern name pattern
-     * @return method array matching the given pattern
-     */
-    public static Method[] getDeclaredMethodsThatMatches(Class clazz, Pattern pattern) {
-        return getDeclaredMethodsThatMatches(clazz, pattern, false);
-    }
-
-    /**
-     * Returns the declared method array of the given class that matches the given regex pattern.
-     *
-     * @param clazz               Class to check
-     * @param pattern             pattern
-     * @param includeParamInMatch If true, pattern can contains method parameter types
-     * @return method array matching the given pattern
-     */
-    public static Method[] getDeclaredMethodsThatMatches(Class clazz, String pattern, boolean includeParamInMatch) {
-        return getDeclaredMethodsThatMatches(clazz, Pattern.compile(pattern), includeParamInMatch);
-    }
-
-    /**
-     * Returns the declared method array of the given class that matches the given regex pattern.
-     *
-     * @param clazz               Class to check
-     * @param pattern             pattern
-     * @param includeParamInMatch If true, pattern can contains method parameter types, eg my.*meth\(java\.lang\.String,int(,int[])?\)
-     * @return method array matching the given pattern
-     */
-    public static Method[] getDeclaredMethodsThatMatches(Class clazz, Pattern pattern, boolean includeParamInMatch) {
-        List<Method> methodsList = new ArrayList<Method>();
-        Method[] methods = clazz.getDeclaredMethods();
-        for (Method method : methods) {
-            StringBuilder name = new StringBuilder(method.getName());
-            if (includeParamInMatch) {
-                name.append("(");
-                int i = 0, max = method.getParameterTypes().length;
-                for (Class<?> type : method.getParameterTypes()) {
-                    name.append(Types.getTypeName(type)).append(++i < max ? "," : "");
-                }
-                name.append(")");
-            }
-            if (pattern.matcher(name).matches()) {
-                methodsList.add(method);
-            }
-        }
-        return methodsList.toArray(new Method[methodsList.size()]);
-    }
 }

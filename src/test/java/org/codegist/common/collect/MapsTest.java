@@ -22,9 +22,8 @@ package org.codegist.common.collect;
 
 import org.junit.Test;
 
-import java.util.Collections;
-import java.util.*;
-import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -32,45 +31,6 @@ import static org.junit.Assert.*;
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public class MapsTest {
-
-    @Test(expected = NullPointerException.class)
-    public void testExtractByPatternNull(){
-        assertNull(Maps.extractByPattern(null, (String[])null));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testExtractByPatternNull2(){
-        assertNull(Maps.extractByPattern(null, (Pattern[])null));
-    }
-
-    @Test
-    public void testExtractByPatternEmpty(){
-        Map<String,Object> m = new HashMap<String, Object>(){{
-            put("a","b");
-            put("c","d");
-        }};
-        assertTrue(Maps.extractByPattern(m, "").isEmpty());
-    }
-
-    @Test
-    public void testExtractByPattern(){
-        Map<String,Object> m = new HashMap<String, Object>(){{
-            put("a123b","b");
-            put("c123d","d");
-            put("c456d","f");
-            put("cdd","h");
-            put("46","h");
-            put("65","h");
-        }};
-        Map<String,Object> expected = new HashMap<String, Object>(){{
-            put("c123d","d");
-            put("c456d","f");
-            put("46","h");
-            put("65","h");
-        }};
-        assertEquals(expected, Maps.extractByPattern(m, "c\\d+d","\\d+"));
-    }
-
 
     @Test
     public void testFilterEmpty(){
@@ -95,33 +55,6 @@ public class MapsTest {
         assertEquals(expected, Maps.filter(m, "a","e","g"));
     }
 
-    @Test
-    public void testAreEmptiesNull() {
-        assertTrue(Maps.areEmpties(null));
-    }
-
-    @Test
-    public void testAreEmptiesEmpty1() {
-        assertTrue(Maps.areEmpties());
-    }
-
-    @Test
-    public void testAreEmptiesEmpty2() {
-        assertTrue(Maps.areEmpties(new HashMap(), new TreeMap()));
-    }
-
-    @Test
-    public void testAreEmptiesEmpty3() {
-        assertTrue(Maps.areEmpties(new HashMap(), null, new TreeMap()));
-    }
-
-    @Test
-    public void testNotEmpty() {
-        assertFalse(Maps.areEmpties(new HashMap() {{
-            put("", "");
-        }}, null, new TreeMap()));
-    }
-
     @Test(expected = NullPointerException.class)
     public void testPutIfNotPresentNull1() {
         Maps.putIfAbsent(null, "key", "val");
@@ -143,60 +76,5 @@ public class MapsTest {
         assertFalse(Maps.putIfAbsent(m, "a", "c"));
         assertEquals("b", m.get("a"));
     }
-
-    @Test
-    public void testUnmodifiableNull() {
-        assertNotNull(Maps.unmodifiable(null));
-    }
-
-    @Test
-    public void testUnmodifiableNull2() {
-        assertNotNull(Maps.unmodifiable(null, true));
-    }
-
-    @Test
-    public void testUnmodifiableNull3() {
-        assertNull(Maps.unmodifiable(null, false));
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void testUnmodifiable() {
-        Map unmodifiable = Maps.unmodifiable(new HashMap());
-        unmodifiable.put("a", "n");
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void testUnmodifiable2() {
-        Map unmodifiable = Maps.unmodifiable(null);
-        unmodifiable.put("a", "n");
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testReverseNull() {
-        Maps.reverse(null);
-    }
-
-    @Test
-    public void testReverseEmpty() {
-        Map<Object, List<Object>> reverse = Maps.reverse(new HashMap<Object, Object>());
-        assertTrue(reverse.isEmpty());
-    }
-
-    @Test
-    public void testReverse1() {
-        Map<String, List<String>> reverse = Maps.reverse(new HashMap<String, String>() {{
-            put("a", "b");
-            put("b", "c");
-            put("c", "d");
-            put("d", "d");
-        }});
-        assertFalse(reverse.isEmpty());
-        assertEquals(java.util.Arrays.asList("a"), reverse.get("b"));
-        assertEquals(java.util.Arrays.asList("b"), reverse.get("c"));
-        List<String> ds = reverse.get("d");
-        Collections.sort(ds);
-        assertEquals(java.util.Arrays.asList("c", "d"), ds);
-    }
-
 
 }

@@ -44,39 +44,6 @@ public final class Urls {
         throw new IllegalStateException();
     }
 
-    /**
-     * Builds a url query string part using the given parameter, encoded with the given encoding. Do not contains the leading "?"
-     *
-     * @param params   Parameter to include in the query string
-     * @param encoding Encoding to use. If null, won't encode param name/value
-     * @return query string
-     * @throws UnsupportedEncodingException
-     */
-    public static String buildQueryString(Map<String, String> params, String encoding) throws UnsupportedEncodingException {
-        StringBuilder urlBuilder = new StringBuilder();
-        int i = 0, max = params.size();
-        boolean encode = encoding != null;
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            String name = encode ? encode(entry.getKey(), encoding) : entry.getKey();
-            String value = encode ? encode(entry.getValue(), encoding) : entry.getValue();
-            urlBuilder.append(name).append("=").append(value);
-            if (++i < max) {
-                urlBuilder.append("&");
-            }
-        }
-        return urlBuilder.toString();
-    }
-
-    /**
-     * Builds a url query string part using the given parameter, NB: Param are supposed to be pre-encoded as this method won't encoded them
-     * @param params
-     * @return
-     * @throws UnsupportedEncodingException
-     */
-    public static String buildQueryString(Map<String, String> params) throws UnsupportedEncodingException {
-        return buildQueryString(params, null);
-    }
-
     public static String encode(String value, String encoding) throws UnsupportedEncodingException {
         String encoded = URLEncoder.encode(value, encoding);
         StringBuffer buf = new StringBuffer(encoded.length());

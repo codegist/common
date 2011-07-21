@@ -36,6 +36,13 @@ public class LoggerProviderTest {
 
 
     @Test
+    public void testLogCatFactory() throws ClassNotFoundException {
+        ClassLoader cLoader = mock(ClassLoader.class);
+        when(cLoader.loadClass(any(String.class))).thenAnswer(newClassLoaderAnswer("android.util.Log"));
+        LoggerFactory factory = LoggerProvider.getAvailableLoggerFactory(cLoader);
+        assertEquals(LogCatLogger.class, factory.getLogger("test").getClass());
+    }
+    @Test
     public void testLog4jFactory() throws ClassNotFoundException {
         ClassLoader cLoader = mock(ClassLoader.class);
         when(cLoader.loadClass(any(String.class))).thenAnswer(newClassLoaderAnswer("org.apache.log4j.Logger"));
@@ -59,6 +66,7 @@ public class LoggerProviderTest {
     @Test
     public void testLoggerTryOrder() throws ClassNotFoundException {
         final String[] expectedOrder = {
+                "android.util.Log",
                 "org.apache.log4j.Logger",
                 "org.slf4j.LoggerFactory",
                 "org.apache.commons.logging.LogFactory"

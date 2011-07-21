@@ -25,14 +25,6 @@ public final class Classes {
         throw new IllegalStateException();
     }
 
-    public static boolean isClassKnown(String className){
-        try {
-            Class.forName(className);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
     public static boolean isClassKnown(String className, ClassLoader loader){
         try {
             Class.forName(className, false, loader);

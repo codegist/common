@@ -35,6 +35,7 @@ final class LoggerProvider {
     private static final LoggerFactory DEFAULT_FACTORY = new LoggerFactory(NoOpLogger.class);
     private static final Map<String, LoggerFactory> LOGGER_FACTORIES =
             new LinkedHashMap<String, LoggerFactory>() {{
+                put("android.util.Log", new LoggerFactory(LogCatLogger.class));
                 put("org.apache.log4j.Logger", new LoggerFactory(Log4jLogger.class));
                 put("org.slf4j.LoggerFactory", new LoggerFactory(Slf4jLogger.class));
                 put("org.apache.commons.logging.LogFactory", new LoggerFactory(ApacheCommonsLogger.class));

@@ -114,26 +114,6 @@ public class UrlsTest {
     static final String EXPECTED_ISO88591 = "a=b&c=d&e=f&g=h%20%26%20f&special=sadely%20all%20is%20about%20%24%24%24%20and%20%A3%A3%A3";
 
     @Test(expected = NullPointerException.class)
-    public void testBuildQueryStringNull() throws UnsupportedEncodingException {
-        Urls.buildQueryString(null, null);
-    }
-
-    @Test
-    public void testBuildQueryStringEmpty() throws UnsupportedEncodingException {
-        assertEquals("", Urls.buildQueryString(new HashMap<String, String>(), null));
-    }
-
-    @Test
-    public void testBuildQueryString1UTF8() throws UnsupportedEncodingException {
-        assertEquals(EXPECTED_UTF8, Urls.buildQueryString(PARAMS, "utf-8"));
-    }
-
-    @Test
-    public void testBuildQueryStringISO88591() throws UnsupportedEncodingException {
-        assertEquals(EXPECTED_ISO88591, Urls.buildQueryString(PARAMS, "ISO-8859-1"));
-    }
-
-    @Test(expected = NullPointerException.class)
     public void testParseNull() throws UnsupportedEncodingException {
         assertTrue(Urls.parseQueryString((String) null).isEmpty());
     }

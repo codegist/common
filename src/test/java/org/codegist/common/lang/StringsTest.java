@@ -22,7 +22,8 @@ package org.codegist.common.lang;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class StringsTest {
 
@@ -52,34 +53,6 @@ public class StringsTest {
         assertEquals("d", Strings.defaultIfBlank("d", "def"));
         assertEquals(" .", Strings.defaultIfBlank(" .", "def"));
         assertEquals("  .  ", Strings.defaultIfBlank("  .  ", "def"));
-    }
-
-    @Test
-    public void testExtractGroups(){
-
-        Strings.extractGroups("([^;]+)?;?(?:charset=(.*))?", "charset=sdfsdfdsf");
-
-        assertArrayEquals(new String[]{"abbabc", "ab", "b", "c"}, Strings.extractGroups("(a(b*))+(c*)", "abbabcd"));
-        assertArrayEquals(new String[]{"abbabc", "ab", "c"}, Strings.extractGroups("(a(?:b*))+(c*)", "abbabcd"));
-        assertArrayEquals(new String[]{"abbabc", "b", "c"}, Strings.extractGroups("(?:a(b*))+(c*)", "abbabcd"));
-        assertArrayEquals(new String[]{"abbabc", "c"}, Strings.extractGroups("(?:a(?:b*))+(c*)", "abbabcd"));
-        assertArrayEquals(new String[]{"abbabc"}, Strings.extractGroups("(?:a(?:b*))+(?:c*)", "abbabcd"));
-        assertArrayEquals(new String[]{}, Strings.extractGroups("(?:a(?:b*))+(?:c*)", "ghjgj"));
-
-        String headerPattern = "^(?:([^;=]+)?;?charset=(.*+))|(?:([^;=]+);?)$";
-
-        assertArrayEquals(new String[]{"application/vnd.oasis.opendocument.spreadsheet;charset=utf-8", "application/vnd.oasis.opendocument.spreadsheet", "utf-8", null},
-                Strings.extractGroups(headerPattern, "application/vnd.oasis.opendocument.spreadsheet;charset=utf-8"));
-        assertArrayEquals(new String[]{"application/vnd.oasis.opendocument.spreadsheet", null,null,"application/vnd.oasis.opendocument.spreadsheet"},
-                Strings.extractGroups(headerPattern, "application/vnd.oasis.opendocument.spreadsheet"));
-        assertArrayEquals(new String[]{"application/vnd.oasis.opendocument.spreadsheet;", null,null,"application/vnd.oasis.opendocument.spreadsheet"},
-                Strings.extractGroups(headerPattern, "application/vnd.oasis.opendocument.spreadsheet;"));
-        assertArrayEquals(new String[]{"charset=utf-8", null, "utf-8", null},
-                Strings.extractGroups(headerPattern, "charset=utf-8"));
-        assertArrayEquals(new String[]{";charset=utf-8", null, "utf-8", null},
-                Strings.extractGroups(headerPattern, ";charset=utf-8"));
-
-        assertArrayEquals(new String[]{}, Strings.extractGroups(headerPattern, ""));
     }
 
 }

@@ -51,11 +51,6 @@ public class ArraysTest {
     }
 
     @Test
-    public void testNonEmptyWithNull() {
-        assertArrayEquals(new String[]{"a", "b"}, Arrays.merge(String.class, new String[0], null, new String[]{"a", "b"}));
-    }
-
-    @Test
     public void testMerge() {
         assertArrayEquals(new String[]{"a", "b", "c", "d"}, Arrays.merge(String.class, new String[0], new String[]{"a", "b"}, new String[0], new String[]{"c", "d"}));
     }
