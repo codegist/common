@@ -20,14 +20,14 @@
 
 package org.codegist.common.lang;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
  */
 public final class Randoms {
     private static final char[] ALPHANUM = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-    private static final Random RDM = new Random();
+    private static final SecureRandom RDM = new SecureRandom();
 
     private Randoms() {
         throw new IllegalStateException();
