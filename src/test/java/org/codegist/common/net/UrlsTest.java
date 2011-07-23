@@ -25,6 +25,7 @@ import org.junit.Test;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -78,7 +79,7 @@ public class UrlsTest {
         map.put("\u0080", "%C2%80");
         map.put("\u3001", "%E3%80%81");
         for (Map.Entry<String, String> e : map.entrySet()) {
-            String val = Urls.encode(e.getKey(), "utf-8");
+            String val = Urls.encode(e.getKey(), Charset.forName("utf-8"));
             assertEquals(e.getValue(), val);
         }
     }
@@ -97,7 +98,7 @@ public class UrlsTest {
         map.put("%C2%80", "\u0080");
         map.put("%E3%80%81", "\u3001");
         for (Map.Entry<String, String> e : map.entrySet()) {
-            String val = Urls.decode(e.getKey(), "utf-8");
+            String val = Urls.decode(e.getKey(), Charset.forName("utf-8"));
             assertEquals(e.getValue(), val);
         }
     }
@@ -166,7 +167,7 @@ public class UrlsTest {
 
     @Test
     public void testParse3() throws UnsupportedEncodingException {
-        Map<String, String> params = Urls.parseQueryString(EXPECTED_UTF8, "utf-8");
+        Map<String, String> params = Urls.parseQueryString(EXPECTED_UTF8, Charset.forName("utf-8"));
         // tests this order of the map
         assertEquals(Arrays.asList("a", "c", "e", "g", "special"), new ArrayList(params.keySet()));
         assertEquals(PARAMS, params);
@@ -174,7 +175,7 @@ public class UrlsTest {
 
     @Test
     public void testParse4() throws UnsupportedEncodingException {
-        Map<String, String> params = Urls.parseQueryString(EXPECTED_UTF8, "ISO-8859-1");
+        Map<String, String> params = Urls.parseQueryString(EXPECTED_UTF8, Charset.forName("ISO-8859-1"));
         // tests this order of the map
         assertEquals(Arrays.asList("a", "c", "e", "g", "special"), new ArrayList(params.keySet()));
         assertFalse(PARAMS.equals(params));
@@ -182,7 +183,7 @@ public class UrlsTest {
 
     @Test
     public void testParse5() throws UnsupportedEncodingException {
-        Map<String, String> params = Urls.parseQueryString(EXPECTED_ISO88591, "ISO-8859-1");
+        Map<String, String> params = Urls.parseQueryString(EXPECTED_ISO88591, Charset.forName("ISO-8859-1"));
         // tests this order of the map
         assertEquals(Arrays.asList("a", "c", "e", "g", "special"), new ArrayList(params.keySet()));
         assertEquals(PARAMS, params);
@@ -190,7 +191,7 @@ public class UrlsTest {
 
     @Test
     public void testParse6() throws UnsupportedEncodingException {
-        Map<String, String> params = Urls.parseQueryString(EXPECTED_ISO88591, "utf-8");
+        Map<String, String> params = Urls.parseQueryString(EXPECTED_ISO88591, Charset.forName("utf-8"));
         // tests this order of the map
         assertEquals(Arrays.asList("a", "c", "e", "g", "special"), new ArrayList(params.keySet()));
         assertFalse(PARAMS.equals(params));

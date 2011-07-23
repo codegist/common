@@ -70,7 +70,7 @@ public final class Objects {
     }
     public static <T> Iterator<T> iterate(Object o) {
         if(o == null) {
-            return EMPTY_ITERATOR;
+            return org.codegist.common.collect.Collections.EMPTY_ITERATOR;
         }else if (o instanceof Collection) {
             return ((Collection<T>) o).iterator();
         }else if(o.getClass().isArray()) {
@@ -80,19 +80,6 @@ public final class Objects {
         }
     }
 
-    private static Iterator EMPTY_ITERATOR = new Iterator() {
-        public boolean hasNext() {
-            return false;
-        }
-
-        public Object next() {
-            throw new UnsupportedOperationException();
-        }
-
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
-    };
 
     private static class SingletonIterator<T> implements Iterator<T> {
         private final AtomicReference<Object> ref;

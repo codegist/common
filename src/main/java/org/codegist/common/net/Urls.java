@@ -44,25 +44,25 @@ public final class Urls {
         throw new IllegalStateException();
     }
 
-    public static String encode(String value, String encoding) throws UnsupportedEncodingException {
-        String encoded = URLEncoder.encode(value, encoding);
-        StringBuffer buf = new StringBuffer(encoded.length());
+    public static String encode(String value, Charset encoding) throws UnsupportedEncodingException {
+        String encoded = URLEncoder.encode(value, encoding.displayName());
+        StringBuilder sb = new StringBuilder(encoded.length());
         char focus;
 
         for (int i = 0; i < encoded.length(); i++) {
             focus = encoded.charAt(i);
             if (focus == '*') {
-                buf.append("%2A");
+                sb.append("%2A");
             } else if (focus == '+') {
-                buf.append("%20");
+                sb.append("%20");
             } else if (focus == '%' && (i + 1) < encoded.length() && encoded.charAt(i + 1) == '7' && encoded.charAt(i + 2) == 'E') {
-                buf.append('~');
+                sb.append('~');
                 i += 2;
             } else {
-                buf.append(focus);
+                sb.append(focus);
             }
         }
-        return buf.toString();
+        return sb.toString();
     }
 
     /**
@@ -72,7 +72,7 @@ public final class Urls {
      * @return Map of query string parameters
      */
     public static Map<String, String> parseQueryString(URI uri) {
-        return parseQueryString(uri, Charset.defaultCharset().displayName());
+        return parseQueryString(uri, Charset.defaultCharset());
     }
 
     /**
@@ -82,7 +82,7 @@ public final class Urls {
      * @return Map of query string parameters
      */
     public static Map<String, String> parseQueryString(String queryString) {
-        return parseQueryString(queryString, Charset.defaultCharset().displayName());
+        return parseQueryString(queryString, Charset.defaultCharset());
     }
 
     /**
@@ -92,7 +92,7 @@ public final class Urls {
      * @param encoding Encoding to use to decode the query string
      * @return Map of query string parameters
      */
-    public static Map<String, String> parseQueryString(URI uri, String encoding) {
+    public static Map<String, String> parseQueryString(URI uri, Charset encoding) {
         String qs = Objects.defaultIfNull(uri.getRawQuery(), "");
         return parseQueryString(qs, encoding);
     }
@@ -104,7 +104,7 @@ public final class Urls {
      * @param encoding    Encoding to use to decode the query string
      * @return Map of query string parameters
      */
-    public static Map<String, String> parseQueryString(String queryString, String encoding) {
+    public static Map<String, String> parseQueryString(String queryString, Charset encoding) {
         Map<String, String> params = new LinkedHashMap<String, String>();
         Scanner scanner = new Scanner(queryString).useDelimiter("&");
         while (scanner.hasNext()) {
@@ -138,9 +138,9 @@ public final class Urls {
      * @param encoding encoding
      * @return decoded content
      */
-    public static String decode(String content, String encoding) {
+    public static String decode(String content, Charset encoding) {
         try {
-            return URLDecoder.decode(content, encoding);
+            return URLDecoder.decode(content, encoding.displayName());
         } catch (UnsupportedEncodingException problem) {
             throw new IllegalArgumentException(problem);
         }
@@ -164,38 +164,39 @@ public final class Urls {
      * @return slash normalized url
      */
     public static String normalizeSlashes(String url) {
+        String pUrl = url;
         String protocol, server, queryString = null;
-        if (hasQueryString(url)) {
-            int questionMark = url.indexOf('?');
-            queryString = url.substring(questionMark);
-            url = url.substring(0, questionMark);
+        if (hasQueryString(pUrl)) {
+            int questionMark = pUrl.indexOf('?');
+            queryString = pUrl.substring(questionMark);
+            pUrl = pUrl.substring(0, questionMark);
         }
-        int sepP = url.indexOf("://");
+        int sepP = pUrl.indexOf("://");
         int sepPEnd = sepP + 3;
-        int firstSlash = url.indexOf('/', sepPEnd);
+        int firstSlash = pUrl.indexOf('/', sepPEnd);
 
-        protocol = url.substring(0, sepP);
+        protocol = pUrl.substring(0, sepP);
         if (firstSlash > -1) {
-            server = url.substring(sepPEnd, firstSlash);
-            url = url.substring(firstSlash);
+            server = pUrl.substring(sepPEnd, firstSlash);
+            pUrl = pUrl.substring(firstSlash);
         } else {
-            server = url.substring(sepPEnd);
-            url = "";
+            server = pUrl.substring(sepPEnd);
+            pUrl = "";
         }
         StringBuilder urlsb = new StringBuilder().append(protocol).append("://").append(server);
-        if (url.length() > 1) {
-            char pre = url.charAt(0);
+        if (pUrl.length() > 1) {
+            char pre = pUrl.charAt(0);
             urlsb.append(pre);
-            for (int i = 1; i < url.length(); i++) {
-                char c = url.charAt(i);
+            for (int i = 1; i < pUrl.length(); i++) {
+                char c = pUrl.charAt(i);
                 if (pre != '/' || c != '/') {
                     urlsb.append(c);
                 }
                 pre = c;
 
             }
-        } else if (url.length() > 0) {
-            urlsb.append(url);
+        } else if (pUrl.length() > 0) {
+            urlsb.append(pUrl);
         }
 
         if (queryString != null) {

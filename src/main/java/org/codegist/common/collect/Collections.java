@@ -22,6 +22,7 @@ package org.codegist.common.collect;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
@@ -50,4 +51,19 @@ public final class Collections {
     public static <T> Set<T> asSet(T... values){
         return new HashSet<T>(asList(values));
     }
+
+    public static final Iterator EMPTY_ITERATOR = new Iterator() {
+        public boolean hasNext() {
+            return false;
+        }
+
+        public Object next() {
+            throw new UnsupportedOperationException();
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    };
+
 }

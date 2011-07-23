@@ -31,80 +31,84 @@ import static java.lang.String.valueOf;
  */
 public class LogCatLogger extends AbstractLogger implements Serializable {
 
-    private static final String TAG = "CodeGist";
+    private final String name;
+
+    public LogCatLogger(String name) {
+        this.name = name;
+    }
 
     @Override
     protected void logError(Object message, Throwable e) {
-        Log.e(TAG, valueOf(message), e);
+        Log.e(name, valueOf(message), e);
     }
 
     @Override
     protected void logError(Object message) {
-        Log.e(TAG, valueOf(message));
+        Log.e(name, valueOf(message));
     }
 
     @Override
     protected void logWarn(Object message, Throwable e) {
-        Log.w(TAG, valueOf(message), e);
+        Log.w(name, valueOf(message), e);
     }
 
     @Override
     protected void logWarn(Object message) {
-        Log.w(TAG, valueOf(message));
+        Log.w(name, valueOf(message));
     }
 
     @Override
     protected void logInfo(Object message, Throwable e) {
-        Log.i(TAG, valueOf(message), e);
+        Log.i(name, valueOf(message), e);
     }
 
     @Override
     protected void logInfo(Object message) {
-        Log.i(TAG, valueOf(message));
+        Log.i(name, valueOf(message));
     }
 
     @Override
     protected void logDebug(Object message, Throwable e) {
-        Log.d(TAG, valueOf(message), e);
+        Log.d(name, valueOf(message), e);
     }
 
     @Override
     protected void logDebug(Object message) {
-        Log.d(TAG, valueOf(message));
+        Log.d(name, valueOf(message));
     }
 
     @Override
     protected void logTrace(Object message, Throwable e) {
-        Log.v(TAG, valueOf(message), e);
+        Log.v(name, valueOf(message), e);
     }
 
     @Override
     protected void logTrace(Object message) {
-        Log.v(TAG, valueOf(message));
+        Log.v(name, valueOf(message));
     }
 
     @Override
     public boolean isErrorOn() {
-        return Log.isLoggable(TAG, Log.ERROR);
+        return Log.isLoggable(name, Log.ERROR);
     }
 
     @Override
     public boolean isWarnOn() {
-        return Log.isLoggable(TAG, Log.WARN);
+        return Log.isLoggable(name, Log.WARN);
     }
 
     @Override
     public boolean isInfoOn() {
-        return Log.isLoggable(TAG, Log.INFO);
+        return Log.isLoggable(name, Log.INFO);
     }
 
     @Override
     public boolean isDebugOn() {
-        return Log.isLoggable(TAG, Log.DEBUG);
+        return Log.isLoggable(name, Log.DEBUG);
     }
 
     @Override
     public boolean isTraceOn() {
-        return Log.isLoggable(TAG, Log.VERBOSE);
+        return Log.isLoggable(name, Log.VERBOSE);
     }
 }
