@@ -21,6 +21,7 @@
 package org.codegist.common.log;
 
 import android.util.Log;
+import org.codegist.common.lang.Strings;
 
 import java.io.Serializable;
 
@@ -34,7 +35,7 @@ public class LogCatLogger extends AbstractLogger implements Serializable {
     private final String name;
 
     public LogCatLogger(String name) {
-        this.name = name;
+        this.name = Strings.substringRight(name, 23);
     }
 
     @Override

@@ -72,4 +72,12 @@ public final class Strings {
         return isEmpty(str) ? def : str;
     }
 
+    public static String substringRight(String str, int length){
+        int strlen = str.length();
+        if(strlen >= length) {
+            return str.substring(strlen - length, strlen);
+        }else{
+            return str;
+        }
+    }
 }
