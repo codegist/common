@@ -21,95 +21,100 @@
 package org.codegist.common.log;
 
 import android.util.Log;
-import org.codegist.common.lang.Strings;
 
 import java.io.Serializable;
 
-import static java.lang.String.valueOf;
+import static java.lang.String.format;
 
 /**
  * @author laurent.gilles@codegist.org
  */
 public class LogCatLogger extends AbstractLogger implements Serializable {
 
+    static final String LOGGER_TAG = LogCatLogger.class.getName() + ".TAG";
+    private static final String TAG = System.getProperty(LOGGER_TAG, "CodeGist");
     private final String name;
 
     public LogCatLogger(String name) {
-        this.name = Strings.substringRight(name, 23);
+        this.name = name;
+    }
+
+    private String msg(Object o){
+        return format("%s: %s", name , o);
     }
 
     @Override
     protected void logError(Object message, Throwable e) {
-        Log.e(name, valueOf(message), e);
+        Log.e(TAG, msg(message), e);
     }
 
     @Override
     protected void logError(Object message) {
-        Log.e(name, valueOf(message));
+        Log.e(TAG, msg(message));
     }
 
     @Override
     protected void logWarn(Object message, Throwable e) {
-        Log.w(name, valueOf(message), e);
+        Log.w(TAG, msg(message), e);
     }
 
     @Override
     protected void logWarn(Object message) {
-        Log.w(name, valueOf(message));
+        Log.w(TAG, msg(message));
     }
 
     @Override
     protected void logInfo(Object message, Throwable e) {
-        Log.i(name, valueOf(message), e);
+        Log.i(TAG, msg(message), e);
     }
 
     @Override
     protected void logInfo(Object message) {
-        Log.i(name, valueOf(message));
+        Log.i(TAG, msg(message));
     }
 
     @Override
     protected void logDebug(Object message, Throwable e) {
-        Log.d(name, valueOf(message), e);
+        Log.d(TAG, msg(message), e);
     }
 
     @Override
     protected void logDebug(Object message) {
-        Log.d(name, valueOf(message));
+        Log.d(TAG, msg(message));
     }
 
     @Override
     protected void logTrace(Object message, Throwable e) {
-        Log.v(name, valueOf(message), e);
+        Log.v(TAG, msg(message), e);
     }
 
     @Override
     protected void logTrace(Object message) {
-        Log.v(name, valueOf(message));
+        Log.v(TAG, msg(message));
     }
 
     @Override
     public boolean isErrorOn() {
-        return Log.isLoggable(name, Log.ERROR);
+        return Log.isLoggable(TAG, Log.ERROR);
     }
 
     @Override
     public boolean isWarnOn() {
-        return Log.isLoggable(name, Log.WARN);
+        return Log.isLoggable(TAG, Log.WARN);
     }
 
     @Override
     public boolean isInfoOn() {
-        return Log.isLoggable(name, Log.INFO);
+        return Log.isLoggable(TAG, Log.INFO);
     }
 
     @Override
     public boolean isDebugOn() {
-        return Log.isLoggable(name, Log.DEBUG);
+        return Log.isLoggable(TAG, Log.DEBUG);
     }
 
     @Override
     public boolean isTraceOn() {
-        return Log.isLoggable(name, Log.VERBOSE);
+        return Log.isLoggable(TAG, Log.VERBOSE);
     }
 }

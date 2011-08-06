@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 /**
  * @author Laurent Gilles (laurent.gilles@codegist.org)
@@ -54,4 +55,5 @@ public final class Files {
     public static String toString(File file) throws IOException {
         return IOs.toString(new FileReader(file), true);
     }
+
 }
