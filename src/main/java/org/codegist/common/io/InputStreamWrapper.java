@@ -21,7 +21,6 @@
 package org.codegist.common.io;
 
 import org.codegist.common.lang.EqualsBuilder;
-import org.codegist.common.lang.Validate;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +34,6 @@ public class InputStreamWrapper extends InputStream {
     private final InputStream delegate;
 
     public InputStreamWrapper(InputStream delegate) {
-        Validate.notNull(delegate, "Input stream can't be null");
         this.delegate = delegate;
     }
 

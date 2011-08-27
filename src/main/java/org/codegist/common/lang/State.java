@@ -25,20 +25,21 @@ public final class State {
         throw new IllegalStateException();
     }
 
-    public static void isTrue(boolean condition, String errorMessage){
+
+    public static void isTrue(boolean condition, String errorMessage, Object... params){
         if(!condition) {
-            throw new IllegalStateException(errorMessage);
+            throw new IllegalStateException(String.format(errorMessage, params));
         }
     }
-    public static void notNull(Object arg, String errorMessage){
+    public static void notNull(Object arg, String errorMessage, Object... params){
         if(arg == null) {
-            throw new IllegalStateException(errorMessage);
+            throw new IllegalStateException(String.format(errorMessage, params));
         }
     }
 
-    public static void notEmpty(String arg, String errorMessage){
+    public static void notEmpty(String arg, String errorMessage, Object... params){
         if(Strings.isBlank(arg)) {
-            throw new IllegalStateException(errorMessage);
+            throw new IllegalStateException(String.format(errorMessage, params));
         }
     }
 

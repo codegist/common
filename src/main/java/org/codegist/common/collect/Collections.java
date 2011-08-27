@@ -52,6 +52,15 @@ public final class Collections {
         return new HashSet<T>(asList(values));
     }
 
+    public static <T> boolean containsOnlyNulls(Collection<T> collection){
+        for(T v : collection){
+            if(v != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static final Iterator EMPTY_ITERATOR = new Iterator() {
         public boolean hasNext() {
             return false;

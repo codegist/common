@@ -103,18 +103,12 @@ public final class Types {
     }
 
     public static Type getComponentType(Class<?> clazz, Type genericType){
-        if(clazz.isArray()) {
-            return clazz.getComponentType();
-        }else if(Collection.class.isAssignableFrom(clazz)){
-            return ((ParameterizedType)genericType).getActualTypeArguments()[0];
+        if(Collection.class.isAssignableFrom(clazz)){
+            return ((ParameterizedType) genericType).getActualTypeArguments()[0];
         }else if (genericType instanceof GenericArrayType) {
-            Type componentType = ((GenericArrayType) genericType).getGenericComponentType();
-            Class<?> componentClass = getClass(componentType);
-            if (componentClass != null) {
-                return Array.newInstance(componentClass, 0).getClass();
-            } else {
-                return null;
-            }
+            return ((GenericArrayType) genericType).getGenericComponentType();
+        }else if(clazz.isArray()) {
+            return clazz.getComponentType();
         }else{
             return genericType;
         }
