@@ -31,7 +31,10 @@ public class ToStringBuilder {
     private final StringBuilder sb;
 
     public ToStringBuilder(Object o) {
-        this.sb = new StringBuilder(o.getClass().getSimpleName() + "[");
+        this(o.getClass().getSimpleName());
+    }
+    public ToStringBuilder(String name) {
+        this.sb = new StringBuilder(name + "[");
     }
 
     public ToStringBuilder append(String name, short v) {

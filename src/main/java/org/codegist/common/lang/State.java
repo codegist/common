@@ -37,7 +37,7 @@ public final class State {
         }
     }
 
-    public static void notEmpty(String arg, String errorMessage, Object... params){
+    public static void notBlank(String arg, String errorMessage, Object... params){
         if(Strings.isBlank(arg)) {
             throw new IllegalStateException(String.format(errorMessage, params));
         }
