@@ -80,14 +80,8 @@
     <dependencies>
         <!--Declared as optional, only needed when org.codegist.common.reflect.CglibProxyFactory is used -->
         <dependency>
-            <groupId>asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>2.2.3</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
+            <artifactId>cglib</artifactId>
             <version>2.2</version>
             <optional>true</optional>
         </dependency>
