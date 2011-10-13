@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2010 CodeGist.org
+ * Copyright 2011 CodeGist.org
  *
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -24,33 +24,6 @@ package org.codegist.common.io;
 import java.io.Serializable;
 import java.io.Writer;
 
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * {@link Writer} implementation that outputs to a {@link StringBuilder}.
- * <p>
- * <strong>NOTE:</strong> This implementation, as an alternative to
- * <code>java.io.StringWriter</code>, provides an <i>un-synchronized</i>
- * (i.e. for use in a single thread) implementation for better performance.
- * For safe usage with multiple {@link Thread}s then
- * <code>java.io.StringWriter</code> should be used.
- *
- * @version $Revision$ $Date$
- * @since Commons IO 2.0
- */
 public class StringBuilderWriter extends Writer implements Serializable {
 
     private final StringBuilder builder;
