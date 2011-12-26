@@ -21,7 +21,7 @@
 <project name="${project.name}">
 
     <custom>
-        <analytics>UA-19826844-3</analytics>
+        <analytics>${account.google-analytics}</analytics>
     </custom>
     
     <body>
